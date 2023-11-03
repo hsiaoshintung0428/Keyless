@@ -177,21 +177,7 @@ extern "C" {
 //For  IOCxFbits.IOCxFN use
 #define GPIO_INTR_FLAG_CLS      0 //Clear interrupt flags
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-//#define _unLockPPS_()  {INTCONbits.GIE = 0;\         //Suspend interrupts
-//                        PPSLOCK = 0x55;\              //Required sequence
-//                        PPSLOCK = 0xAA;\              //Required sequence
-//                        PPSLOCKbits.PPSLOCKED = 0;\   //Clear PPSLOCKED bit 
-//                        INTCONbits.GIE = 1;\         //Restore interrupts
-//                       }
-
-                        
-//#define _LockPPS_()     {INTCONbits.GIE = 0;\         //Suspend interrupts
-//                       PPSLOCK = 0x55;\              //Required sequence
-//                       PPSLOCK = 0xAA;\              //Required sequence
-//                       PPSLOCKbits.PPSLOCKED = 0;\   //Clear PPSLOCKED bit 
-//                       INTCONbits.GIE = 1;\         //Restore interrupts
-//                       }
-
+//For PPS unlock sequence... 
 /*PPS Unlock Sequence (C language)
 //INTCON0bits.GIE = 0;         //Suspend interrupts
 //PPSLOCK = 0x55;              //Required sequence
@@ -199,13 +185,12 @@ extern "C" {
 //PPSLOCKbits.PPSLOCKED = 0;   //Clear PPSLOCKED bit 
 //INTCON0bits.GIE = 1;         //Restore interrupts
 */
-
 #define UnlockIO() {INTCONbits.GIE = 0;\  
                     PPSLOCK = 0x55;\
                     PPSLOCK = 0xAA;\
                     PPSLOCKbits.PPSLOCKED = 0;\
                     INTCONbits.GIE = 1;}
-
+                    
  /*PPS Lock Sequence (C language)
 //INTCON0bits.GIE = 0;         //Suspend interrupts
 //PPSLOCK = 0x55;              //Required sequence
@@ -218,6 +203,91 @@ extern "C" {
                  PPSLOCK = 0xAA;\
                  PPSLOCKbits.PPSLOCKED = 1;\
                  INTCONbits.GIE = 1;}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+//For PPS remap internal source 
+#define _ppsPORTA_  0
+#define _ppsPORTB_  1
+#define _ppsPORTC_  2
+#define _ppsPORTD_  3
+#define _ppsPORTE_  4
+
+#define _ppsPIN0_   0
+#define _ppsPIN1_   1
+#define _ppsPIN2_   2
+#define _ppsPIN3_   3
+#define _ppsPIN4_   4
+#define _ppsPIN5_   5
+#define _ppsPIN6_   6
+#define _ppsPIN7_   7
+//PPS remap output 
+#define ppsOutmap(x,y) ((x<<3)|(y))    //x=PORTx,Y=GPIOn 
+
+//PPS remap external source 
+typedef enum
+{
+    _pps_Out_LC1_ =1, //PortA,PortC
+    _pps_Out_LC2_ =2, //PortA,PortC
+    _pps_Out_LC3_ =3, //PortB,PortD
+    _pps_Out_LC4_ =4, //PortB,PortD
+    
+    _pps_Out_COG1A_ =5,//PortB,PortC
+    _pps_Out_COG1B_ =6,//PortB,PortD
+    _pps_Out_COG1C_ =7,//PortB,PortD
+    _pps_Out_COG1D_ =8,//PortB,PortD
+    
+    _pps_Out_COG2A_ =9,//PortB,PortC
+    _pps_Out_COG2B_ =10,//PortB,PortD
+    _pps_Out_COG2C_ =11,//PortB,PortD
+    _pps_Out_COG2D_ =12,//PortB,PortD
+    
+    _pps_Out_COG3A_,//PortB,PortC
+    _pps_Out_COG3B_,//PortA,PortE
+    _pps_Out_COG3C_,//PortA,PortD
+    _pps_Out_COG3D_,//PortA,PortD
+
+    _pps_Out_COG4A_,//PortB,PortC
+    _pps_Out_COG4B_,//PortA,PortE
+    _pps_Out_COG4C_,//PortA,PortD
+    _pps_Out_COG4D_,//PortA,PortD
+
+    _pps_Out_CCP1_,//PortB,PortC
+    _pps_Out_CCP2_,//PortB,PortC
+    _pps_Out_CCP7_,//PortB,PortD
+    _pps_Out_CCP8_,//PortB,PortD
+
+    _pps_Out_PWM3_,//PortE
+    _pps_Out_PWM4_,//PortD
+    _pps_Out_PWM9_,//PortB
+    _pps_Out_PWM10_,//PortB
+    
+    _pps_Out_PWM5_,//PortD
+    _pps_Out_PWM6_,//PortD
+    _pps_Out_PWM11_,//PortA,PortD
+    _pps_Out_PWM12_,//PortA,PortD
+    
+    _pps_Out_SCK_,//PortB,PortC
+    _pps_Out_SDA_,//PortB,PortC
+    _pps_Out_SD0_,//PortB,PortC
+
+    _pps_Out_TX_,//PortB,PortC
+    _pps_Out_DT_,//PortB,PortC
+
+    _pps_Out_C1_,//PortA,PortD
+    _pps_Out_C2_,//PortA,PortE
+    _pps_Out_C3_,//PortB,PortD
+    _pps_Out_C4_,//PortB,PortD
+    _pps_Out_C5_,//PortA,PortD
+    _pps_Out_C6_,//PortA,PortE
+    _pps_Out_C7_,//PortB,PortD
+    _pps_Out_C8_,//PortB,PortD
+
+    _pps_Out_MD1Out_,//PortA,PortD
+    _pps_Out_MD2Out_,//PortA,PortD
+    _pps_Out_MD3Out_,//PortB,PortD
+    _pps_Out_MD4Out_ = 49 ,//PortB,PortD
+}PPS_Output_PERIPHERAL;
+
 
 
 //**********EXTERN API******************//
