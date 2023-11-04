@@ -61,7 +61,7 @@ extern "C" {
 #define GPIO_INTR_FLAG_CLS      0 //Clear interrupt flags
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-#define ptRPMDET    PORTA   //R.A0 = I/P(Digit)
+#define ptRPMDET    PORTA   //R.A0 = I/P(Digit) ccp or timer input??
 #define piRPMDET    PORTA   //Input register
 #define pdPRMDET    TRISA   //Direction register 
 #define pbnRPMDET   0
@@ -76,8 +76,8 @@ extern "C" {
 #define pbnSEATON   2
 #define pbmSEATON   BITn(pbnSEATON)
 
-#define SetSEATON(a) { if(a)  (poSEATON|pbmSEATON)  \
-                      else   (poSEATON&(~pbmSEATON))}
+#define SetSEATON(a) { if(a)  (poSEATON|pbmSEATON) ; \
+                      else   (poSEATON&(~pbmSEATON));}
 
 #define ISSEATON()   ((piSEATON&pbmSEATON)==pbmSEATON)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -120,16 +120,16 @@ extern "C" {
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //PortA
 #define def_PORTA_DIR           ((uint8_t)0xFF & ~(pbmRPMDET|pbmP_1))  //TRISA 
-#define def_PORTA_INITIAL       ((uint8_t)(0x00|0))                    //LATA   
-#define def_PORTA_ANALOG        ((uint8_t)(0x00|0))                    //ANSELA
-#define def_PORTA_PULLUP        ((uint8_t)(0x00|0))                    //WPUA
-#define def_PORTA_OPENDRAIN     ((uint8_t)(0x00|0))                    //ODCONA
-#define def_PORTA_PWMSlewRate   ((uint8_t)(0x00|0))                    //SLRCONA
-#define def_PORTA_InputLevel    ((uint8_t)(0x00|0))                    //INLVLA               
-#define def_PORTA_Current       ((uint8_t)(0x00|0))                    //HIDRVA
-#define def_PORTA_Int_PEDGE     ((uint8_t)(0x00|0))                    //IOCAP 
-#define def_PORTA_Int_NEDGE     ((uint8_t)(0x00|0))                    //IOCAN 
-#define def_PORTA_Int_FLAG      ((uint8_t)(0x00|0))                    //IOCAF
+#define def_PORTA_INITIAL       ((uint8_t)(0x00))                    //LATA   
+#define def_PORTA_ANALOG        ((uint8_t)(0x00))                    //ANSELA
+#define def_PORTA_PULLUP        ((uint8_t)(0x00))                    //WPUA
+#define def_PORTA_OPENDRAIN     ((uint8_t)(0x00))                    //ODCONA
+#define def_PORTA_PWMSlewRate   ((uint8_t)(0x00))                    //SLRCONA
+#define def_PORTA_InputLevel    ((uint8_t)(0x00))                    //INLVLA               
+#define def_PORTA_Current       ((uint8_t)(0x00))                    //HIDRVA
+#define def_PORTA_Int_PEDGE     ((uint8_t)(0x00))                    //IOCAP 
+#define def_PORTA_Int_NEDGE     ((uint8_t)(0x00))                    //IOCAN 
+#define def_PORTA_Int_FLAG      ((uint8_t)(0x00))                    //IOCAF
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptIMMO      PORTB   //R.B0 = O/P(Digit) PWM ??
 #define piIMMO      PORTB
@@ -139,8 +139,8 @@ extern "C" {
 #define pbmIMMO     BITn(pbnIMM0)
 
 
-#define SetIMMOON(a) { if(a)  (poIMMO|pbmIMMO)  \
-                        else   (poIMMO&(~pbmIMMO))}
+#define SetIMMOON(a) { if(a)  (poIMMO|pbmIMMO) ; \
+                        else   (poIMMO&(~pbmIMMO));}
 
 #define ISIMMOON()   ((piIMMO&pbmIMMO)==pbmIMMO)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -152,10 +152,10 @@ extern "C" {
 #define pbmN125K     BITn(pbnN125K)
 
 
-#define SetIMMOON(a) { if(a)  (poN125K|pbmN125K)  \
+#define SetN125K(a) { if(a)  (poN125K|pbmN125K)  \
                         else   (poN125K&(~pbmN125K))}
 
-#define ISIMMOON()   ((piN125K&pbmN125K)==pbmN125K)
+#define ISN125K()   ((piN125K&pbmN125K)==pbmN125K)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptSEATDET      PORTB   //R.B2 = i/P(Digit)
 #define piSEATDET      PORTB
@@ -165,8 +165,8 @@ extern "C" {
 #define pbmSEATDET     BITn(pbnSEATDET)
 #define paSEATDET      
 
-#define SetSEATDET(a) { if(a)  (poSEATDET|pbmSEATDET)  \
-                        else   (poSEATDET&(~pbmSEATDET))}
+#define SetSEATDET(a) { if(a)  (poSEATDET|pbmSEATDET);  \
+                        else   (poSEATDET&(~pbmSEATDET));}
 
 #define ISSEATDET()   ((piSEATDET&pbmSEATDET)==pbmSEATDET)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -189,17 +189,17 @@ extern "C" {
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //PortB
-#define def_PORTB_DIR           ((uint8_t)0xFF & ~(pbmIMMO|pbmN125K|pbmUART))  //TRISB 
-#define def_PORTB_INITIAL       ((uint8_t)(0x00|0))                    //LATB   
-#define def_PORTB_ANALOG        ((uint8_t)(0x00|0))                    //ANSELB
-#define def_PORTB_PULLUP        ((uint8_t)(0x00|0))                    //WPUB
-#define def_PORTB_OPENDRAIN     ((uint8_t)(0x00|0))                    //ODCONB
-#define def_PORTB_PWMSlewRate   ((uint8_t)(0x00|0))                    //SLRCONB
-#define def_PORTB_InputLevel    ((uint8_t)(0x00|0))                    //INLVLB              
-#define def_PORTB_Current       ((uint8_t)(0x00|0))                    //HIDRVB
-#define def_PORTB_Int_PEDGE     ((uint8_t)(0x00|0))                    //IOCBP 
-#define def_PORTB_Int_NEDGE     ((uint8_t)(0x00|0))                    //IOCBN 
-#define def_PORTB_Int_FLAG      ((uint8_t)(0x00|0))                    //IOCBF
+#define def_PORTB_DIR           ((uint8_t)0xFF & ~(pbmIMMO|pbmN125K|pbmUART))   
+#define def_PORTB_INITIAL       ((uint8_t)(0x00))                      
+#define def_PORTB_ANALOG        ((uint8_t)(0x00))                    
+#define def_PORTB_PULLUP        ((uint8_t)(0x00))                   
+#define def_PORTB_OPENDRAIN     ((uint8_t)(0x00))           
+#define def_PORTB_PWMSlewRate   ((uint8_t)(0x00))              
+#define def_PORTB_InputLevel    ((uint8_t)(0x00))                              
+#define def_PORTB_Current       ((uint8_t)(0x00))                 
+#define def_PORTB_Int_PEDGE     ((uint8_t)(0x00))                  
+#define def_PORTB_Int_NEDGE     ((uint8_t)(0x00))                 
+#define def_PORTB_Int_FLAG      ((uint8_t)(0x00))                   
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptLAMP            PORTC   //RC[0.7] = O/P
 #define piLAMP            PORTC
@@ -210,48 +210,48 @@ extern "C" {
 #define pbmLAMP_Right     BITn(pbnLAMP_Right)
 #define pbmLAMP_Left      BITn(pbnLAMP_Left)
 
-#define SetLAMP_Right(a) { if(a) (poPWRpoLAMPDC|pbmLAMP_Right)  \
-                           else   (poLAMP&(~pbmLAMP_Right))}
+#define SetLAMP_Right(a) { if(a) (poPWRpoLAMPDC|pbmLAMP_Right);  \
+                           else   (poLAMP&(~pbmLAMP_Right));}
 
-#define SetLAMP_Left(a) { if(a)  (poLAMP|pbmLAMP_Left)  \
-                          else   (poLAMP&(~pbmLAMP_Left))}
+#define SetLAMP_Left(a) { if(a)  (poLAMP|pbmLAMP_Left) ; \
+                          else   (poLAMP&(~pbmLAMP_Left));}
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptBuzCon            PORTC   //RC.1 = O/P
-#define piBuzCon           PORTC
+#define piBuzCon            PORTC
 #define pdBuzCon            TRISC
-#define poBuzCon           LATC
+#define poBuzCon            LATC
 #define pbnBuzCon            1
 #define pbmBuzCon           BITn(pbnBuzCon)
 
 
-#define SetBuzCon(a) { if(a) (poBuzCon|pbmBuzCon)  \
-                      else   (poBuzCon&(~pbmBuzCon))}
+#define SetBuzCon(a) { if(a) (poBuzCon|pbmBuzCon) ; \
+                      else   (poBuzCon&(~pbmBuzCon));}
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptOCPADC            PORTC   //RC.2 = I/P(Analog)
-#define piOCPADC           PORTC
-#define pdOCPADC           TRISC
-#define poOCPADC           LATC
+#define piOCPADC            PORTC
+#define pdOCPADC            TRISC
+#define poOCPADC            LATC
 #define pbnOCPADC            2
-#define pbmOCPADC           BITn(pbmOCPADC)
+#define pbmOCPADC           BITn(pbnOCPADC)
 #define adOCPADC              14    //AN14 
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-#define ptRFSPI            PORTC   //RC[3.4.5] = O/P MSSP module ??
-#define piRFSPI           PORTC
+#define ptRFSPI             PORTC   //RC[3.4.5] = O/P MSSP module ??
+#define piRFSPI             PORTC
 #define pdRFSPI             TRISC
-#define poRFSPI              LATC
-#define pbnRFSPICLK            3     // O/P
-#define pbnRFSPIMISO           4   // I/P
-#define pbnRFSPIMOSI           5   //O/P
-#define pbmRFSPICLK            BITn(pbnRFSPICLK)
-#define pbmRFSPIMISO           BITn(pbnRFSPIMOSI)
-#define pbmRFSPIMOSI           BITn(pbnRFSPIMOSI)
+#define poRFSPI             LATC
+#define pbnRFSPICLK         3     // O/P
+#define pbnRFSPIMISO        4   // I/P
+#define pbnRFSPIMOSI        5   //O/P
+#define pbmRFSPICLK         BITn(pbnRFSPICLK)
+#define pbmRFSPIMISO        BITn(pbnRFSPIMOSI)
+#define pbmRFSPIMOSI        BITn(pbnRFSPIMOSI)
 
-#define SetRFSPICLK(a) { if(a) (poRFSPI|pbmRFSPICLK)  \
-                         else   (poRFSPI&(~pbmRFSPICLK))}
+#define SetRFSPICLK(a) { if(a) (poRFSPI|pbmRFSPICLK);  \
+                         else   (poRFSPI&(~pbmRFSPICLK));}
 
-#define SetRFSPIMOSI(a) { if(a) (poRFSPI|pbmRFSPIMOSI)  \
-                          else   (poRFSPI&(~pbmRFSPIMOSI))}    
+#define SetRFSPIMOSI(a) { if(a) (poRFSPI|pbmRFSPIMOSI);  \
+                          else   (poRFSPI&(~pbmRFSPIMOSI));}    
 
  #define ISRFSPIMISO()   ((piRFSPI&pbmRFSPIMISO)==pbmRFSPIMISO)        
  /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -263,18 +263,33 @@ extern "C" {
 #define pbmLearnMode           BITn(pbnLearnMode)
 
 
- #define ISRFSPIMISO()   ((piLearnMode&pbmLearnMode)==pbmLearnMode)  
+ #define ISLearnMode()   ((piLearnMode&pbmLearnMode)==pbmLearnMode)  
+ 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+//PortC
+#define def_PORTC_DIR           ((uint8_t)0xFF & ~(pbmLAMP_Right|pbmLAMP_Left|pbmBuzCon|pbmRFSPICLK|pbmRFSPIMOSI))  
+#define def_PORTC_INITIAL       ((uint8_t)0x00)                           
+#define def_PORTC_ANALOG        ((uint8_t)0x00 & ~(pbmOCPADC))          
+#define def_PORTC_PULLUP        (uint8_t)0xFF                          
+#define def_PORTC_OPENDRAIN     (uint8_t)0x00                          
+#define def_PORTC_PWMSlewRate   (uint8_t)0xFF                          
+#define def_PORTC_InputLevel    (uint8_t)0xFF                                        
+#define def_PORTC_Current       (uint8_t)0x00                          
+#define def_PORTC_Int_PEDGE     (uint8_t)0x00                         
+#define def_PORTC_Int_NEDGE     (uint8_t)0x00                          
+#define def_PORTC_Int_FLAG      (uint8_t)0x00                          
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 #define ptBlueLed            PORTD   //RD.2 = O/P
 #define piBlueLed            PORTD
 #define pdBlueLed            TRISD
 #define poBlueLed            LATD
-#define pbnBlueLed     2
-#define pbmBlueLed     BITn(pbnBlueLed)
+#define pbnBlueLed           2
+#define pbmBlueLed           BITn(pbnBlueLed)
 
 
-#define SetBlueLed(a) { if(a) (poBlueLed|pbmBlueLed)  \
-                           else   (poBlueLed&(~pbmBlueLed))}                            
+#define SetBlueLed(a)       { if(a) (poBlueLed|pbmBlueLed);  \
+                              else   (poBlueLed&(~pbmBlueLed));}                            
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptRFSPICS            PORTD   //RD.3 = O/P
 #define piRFSPICS            PORTD
@@ -284,8 +299,8 @@ extern "C" {
 #define pbmRFSPICS          BITn(pbnRFSPICS)
 
 
-#define SetRFSPICS(a) { if(a) (poRFSPICS|pbmRFSPICS)  \
-                        else   (poRFSPICS&(~pbmRFSPICS))}                            
+#define SetRFSPICS(a)       { if(a) (poRFSPICS|pbmRFSPICS);  \
+                              else   (poRFSPICS&(~pbmRFSPICS));}                            
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptVINADC           PORTD   //RD.4 = I/P(Analog)
 #define piVINADC           PORTD
@@ -296,11 +311,11 @@ extern "C" {
 #define adVINADC             24    //AN24 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptRFPB6           PORTD   //RD.5 = I/P(Digitai) need interrupt??
-#define piRFPB6          PORTD
+#define piRFPB6           PORTD
 #define pdRFPB6           TRISD
 #define poRFPB6           LATD
-#define pbnRFPB6            5
-#define pbmRFPB6           BITn(pbnRFPB6)
+#define pbnRFPB6          5
+#define pbmRFPB6          BITn(pbnRFPB6)
 
 
  #define ISRFPB6()   ((poRFPB6&pbmRFPB6)==pbmRFPB6)  
@@ -309,38 +324,14 @@ extern "C" {
 #define piIGNADC           PORTD
 #define pdIGNADC           TRISD
 #define poIGNADC           LATD
-#define pbnIGNADC            6
-#define pbmIGNADC           BITn(pbnIGNADC)
-#define adIGNADC             26    //AN24 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-#define ptMOTOPWM           PORTE   //PE[1.2] = O/P PWM
-#define piMOTOPWM           PORTE
-#define pdMOTOPWM           TRISE
-#define poMOTOPWM           LATE
-#define pbnMOTOPWM1            1
-#define pbnMOTOPWm2            2
-#define pbmMOTOPWM1           BITn(pbnMOTOPWM1)
-#define pbmMOTOPWM2           BITn(pbnMOTOPWm2)
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-//PortC
-#define def_PORTC_DIR           ((uint8_t)0xFF & ~(pbmRPMDET|pbmP_1))  //TRISA 
-#define def_PORTC_INITIAL       ((uint8_t)0x00)                        //LATA   
-#define def_PORTC_ANALOG        (uint8_t)0x00                          //ANSELA
-#define def_PORTC_PULLUP        (uint8_t)0xFF                          //WPUA
-#define def_PORTC_OPENDRAIN     (uint8_t)0x00                          //ODCONA
-#define def_PORTC_PWMSlewRate   (uint8_t)0xFF                          //SLRCONA
-#define def_PORTC_InputLevel    (uint8_t)0xFF                          //INLVLA               
-#define def_PORTC_Current       (uint8_t)0x00                          //HIDRVA
-#define def_PORTC_Int_PEDGE     (uint8_t)0x00                          //IOCAP 
-#define def_PORTC_Int_NEDGE     (uint8_t)0x00                          //IOCAN 
-#define def_PORTC_Int_FLAG      (uint8_t)0x00                          //IOCAF
+#define pbnIGNADC          6
+#define pbmIGNADC          BITn(pbnIGNADC)
+#define adIGNADC           26    //AN24 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //PortD
-#define def_PORTD_DIR           ((uint8_t)0xFF & ~(pbmRPMDET|pbmP_1))  //TRISA 
+#define def_PORTD_DIR           ((uint8_t)0xFF & ~(pbmBlueLed|pbmRFSPICS))  //TRISA 
 #define def_PORTD_INITIAL       ((uint8_t)0x00)                        //LATA   
-#define def_PORTD_ANALOG        (uint8_t)0x00                          //ANSELA
+#define def_PORTD_ANALOG        ((uint8_t)0x00|(pbmVINADC|pbmIGNADC))  //ANSELA
 #define def_PORTD_PULLUP        (uint8_t)0xFF                          //WPUA
 #define def_PORTD_OPENDRAIN     (uint8_t)0x00                          //ODCONA
 #define def_PORTD_PWMSlewRate   (uint8_t)0xFF                          //SLRCONA
@@ -350,8 +341,26 @@ extern "C" {
 #define def_PORTD_Int_NEDGE     (uint8_t)0x00                          //IOCAN 
 #define def_PORTD_Int_FLAG      (uint8_t)0x00                          //IOCAF
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+#define ptMOTOPWM           PORTE   //PE[1.2] = O/P PWM
+#define piMOTOPWM           PORTE
+#define pdMOTOPWM           TRISE
+#define poMOTOPWM           LATE
+#define pbnMOTOPWM1         1
+#define pbnMOTOPWm2         2
+#define pbmMOTOPWM1         BITn(pbnMOTOPWM1)
+#define pbmMOTOPWM2         BITn(pbnMOTOPWm2)
+
+#define SetMOTOPWM1(a) { if(a) (pdMOTOPWM|pbmMOTOPWM1);  \
+                        else   (pdMOTOPWM&(~pbmMOTOPWM1));}  
+
+#define SetMOTOPWM2(a) { if(a) (pdMOTOPWM|pbmMOTOPWM2);  \
+                        else   (pdMOTOPWM&(~pbmMOTOPWM2));}                            
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 //PortE
-#define def_PORTE_DIR           ((uint8_t)0xFF & ~(pbmRPMDET|pbmP_1))  //TRISA 
+#define def_PORTE_DIR           ((uint8_t)0xFF & ~(pbmMOTOPWM1|pbmMOTOPWM2))  //TRISA 
 #define def_PORTE_INITIAL       ((uint8_t)0x00)                        //LATA   
 #define def_PORTE_ANALOG        (uint8_t)0x00                          //ANSELA
 #define def_PORTE_PULLUP        (uint8_t)0xFF                          //WPUA
