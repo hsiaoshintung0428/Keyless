@@ -10,6 +10,10 @@
 #include <xc.h>
 #include "global.h"
 #include "ioports.h"
+//#include "TMR.h"
+
+
+
 
 void Init_ExtOsc(void);
 
@@ -19,7 +23,9 @@ void Init_ExtOsc(void);
 int main(int argc, char** argv) {
     
     Init_ExtOsc();
-    Init_GPIO();
+//    Init_TMR0();
+//    Init_GPIO();
+    TRISA   = 0x00;
     while(1)
     {
         
@@ -41,3 +47,5 @@ void Init_ExtOsc(void)
     OSCCONbits.IRCF =   ExtOSC_8MHz;
     OSCCONbits.SCS   = 0;        
 }
+
+

@@ -36,12 +36,17 @@ extern "C" {
 	typedef int32_t  s32;
 	typedef int16_t  s16; 
 	typedef int8_t   s8;
+    
+    typedef int32_t  INT32_t;
+	typedef int16_t  INT16_t;
+	typedef int8_t   INT8_t;
 	
 	/*!< Unsigned integer types  */
 	typedef unsigned char     uint8_t;
 	typedef unsigned short    uint16_t;
 	typedef unsigned long     uint32_t;
 		
+    
 	typedef unsigned char     U8;
 	typedef unsigned short    U16;
 	typedef unsigned long     U32;
@@ -50,6 +55,9 @@ extern "C" {
 	typedef uint16_t  u16;
 	typedef uint8_t   u8;
 	
+    typedef uint32_t  UINT32_t;
+	typedef uint16_t  UINT16_t;
+	typedef uint8_t   UINT8_t;
 
 	
 	typedef                float   FLOAT;

@@ -11,19 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
+#include "mcu.h"
 #include "global.h"
 #include "ioports.h"
 
 // GPIO Control Register Fields
-
-#
-
-#ifndef __PIC16__
-    #define _PIC16F1779_ 1
-    #define _PIC16F1778_ 2
-#endif
-#define __MCU__     (_PIC16F1779_)
-
 void Init_GPIO(void)
 {
     #if (__MCU__    ==  _PIC16F1779_)

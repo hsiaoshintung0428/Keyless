@@ -380,12 +380,14 @@ extern "C" {
 //PPSLOCKbits.PPSLOCKED = 0;   //Clear PPSLOCKED bit 
 //INTCON0bits.GIE = 1;         //Restore interrupts
 */
-#define UnlockIO() {INTCONbits.GIE = 0;\  
+
+#define UnlockIO() {INTCONbits.GIE = 0;\
                     PPSLOCK = 0x55;\
                     PPSLOCK = 0xAA;\
                     PPSLOCKbits.PPSLOCKED = 0;\
                     INTCONbits.GIE = 1;}
                     
+                
  /*PPS Lock Sequence (C language)
 //INTCON0bits.GIE = 0;         //Suspend interrupts
 //PPSLOCK = 0x55;              //Required sequence
