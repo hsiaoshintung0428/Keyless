@@ -402,7 +402,7 @@ extern "C" {
                  INTCONbits.GIE = 1;}
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-//For PPS remap internal source 
+//For PPS remap internal source [Spec:xxxPPS: PERIPHERAL xxx INPUT SELECTION]
 #define _ppsPORTA_  0
 #define _ppsPORTB_  1
 #define _ppsPORTC_  2
@@ -420,7 +420,7 @@ extern "C" {
 //PPS remap output 
 #define ppsOutmap(x,y) ((x<<3)|(y))    //x=PORTx,Y=GPIOn 
 
-//PPS remap external source 
+//PPS remap external source [Spec:AVAILABLE PORTS FOR OUTPUT BY PERIPHERAL]
 typedef enum
 {
     _pps_Out_LC1_ =1, //PortA,PortC
@@ -491,6 +491,7 @@ typedef enum
 //**********EXTERN API******************//
 
 extern void Init_GPIO(void);
+extern void Init_Sleep_GPIO(void);
 
 
 #endif	/* IOPORTS_H */

@@ -19,7 +19,7 @@ void Init_Interttup(void)
 }
 
 
-void __interrupt() ISR(void)
+void _INTERRUPT ISR(void)
 {
     if(Read_TMR0IF())
     {

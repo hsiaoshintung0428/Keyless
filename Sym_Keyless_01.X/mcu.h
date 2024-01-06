@@ -41,6 +41,8 @@ extern "C" {
 #ifdef _PIC16_
     #define _PIC16F1779_ 1
     #define _PIC16F1778_ 2
+
+    #define _INTERRUPT  __interrupt()
 #endif
 
 #define __MCU__     (_PIC16F1779_)
