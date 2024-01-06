@@ -11,3 +11,9 @@
 #include "global.h"
 #include "ioports.h"
 #include "TMR.h"
+
+
+void Init_PWM(void)
+{
+    
+}
