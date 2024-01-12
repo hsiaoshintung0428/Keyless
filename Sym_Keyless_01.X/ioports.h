@@ -210,7 +210,7 @@ extern "C" {
 #define pbmLAMP_Right     BITn(pbnLAMP_Right)
 #define pbmLAMP_Left      BITn(pbnLAMP_Left)
 
-#define SetLAMP_Right(a) { if(a) (poPWRpoLAMPDC|pbmLAMP_Right);  \
+#define SetLAMP_Right(a) { if(a) (poLAMP|pbmLAMP_Right);  \
                            else   (poLAMP&(~pbmLAMP_Right));}
 
 #define SetLAMP_Left(a) { if(a)  (poLAMP|pbmLAMP_Left) ; \

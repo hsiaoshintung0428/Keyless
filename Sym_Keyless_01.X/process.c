@@ -11,3 +11,21 @@
 #include "global.h"
 #include "ioports.h"
 #include "TMR.h"
+
+//龍頭解鎖
+void Unlock_Handle(void)
+{
+    
+}
+
+//龍頭上鎖
+void Lock_Handle(void)
+{
+    
+}
+
+//閃爍方向燈
+void Blinking_TurnSignal(uint8_t control )
+{
+    
+}

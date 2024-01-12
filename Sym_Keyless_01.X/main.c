@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
+#include "config.h"
 #include "global.h"
 #include "ioports.h"
 #include "TMR.h"

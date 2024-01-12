@@ -16,20 +16,22 @@ extern "C" {
 }
 #endif
 
-#define Enable_Globa_Interrupt(n)   (INTCONbits.GIE = n)
-#define Enable_Extern_Interrupt(n)  (INTCONbits.PEIE = n)
+#define Set_Globa_Interrupt(n)   INTCONbits.GIE = n
+#define Set_Extern_Interrupt(n)  INTCONbits.PEIE = n
+
 
  //---TMR0 interrupt--//
-#define Enable_TMR0IE   (INTCONbits.T0IE = n)
-#define Read_TMR0IF()   (INTCONbits.TMR0IF)
-#define Set_TMR0IF(n)   (INTCONbits.TMR0IF = n) 
+#define Set_TMR0IE(n)   INTCONbits.T0IE = n
+#define Read_TMR0IF()   INTCONbits.TMR0IF
+#define CLS_TMR0IF()   INTCONbits.TMR0IF = 0 
  //--Extern modle Interrupt--//
-#define Enable_INTE   (INTCONbits.INTE = n)
-#define Read_INTF()   (INTCONbits.INTF)
-#define Set_INTF(n)   (INTCONbits.INTF = n)    
+#define Set_INTE(n)   INTCONbits.INTE = n
+#define Read_INTF()   INTCONbits.INTF
+#define CLS_INTF()   INTCONbits.INTF = 0    
   //--GPIO change Interrupt--//
-#define Enable_IOCIE   (INTCONbits.IOCIE = n)
-#define Read_IOCIF()   (INTCONbits.IOCIF)
+#define Set_IOCIE(n)   INTCONbits.IOCIE = n
+#define Read_IOCIF()   INTCONbits.IOCIF
+#define CLS_IOCIF()   INTCONbits.IOCIF = 0
  
 extern void Init_Interttup(void);   
 //extern void __interrupt() ISR(void)

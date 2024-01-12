@@ -22,7 +22,7 @@ extern "C" {
 #define MCUFAMILY _PIC16_
 #define EnablePLL	1
 #if(EnablePLL)
-	#define FOSC	(4*8000000)h
+	#define FOSC	(4*8000000uL)
 #else
 	#define FOSC	8000000h
 #endif

@@ -20,8 +20,18 @@ void Init_TMR0(void)
     OPTION_REGbits.T0CS = 0;
 }
 //
-void RestoreTMR0(uint8_t count, uint8_t val)
+void RestoreTMR0(uint8_t value)
 {
-    TMR0 = count;
+    TMR0 = value;
  
+}
+
+void Init_TMR2(void)
+{
+    
+}
+
+void SetTMR2(uint8_t value)
+{
+    
 }

@@ -27,9 +27,9 @@ typedef enum{
 #define PollingTime 5 //mS 
 #define PollingTimeToFeq    (1000uL/PollingTime)
 #define Timer0PS    TMR0Rate256
-#define Timer0Rate  (1uL<<(Timer0PS+1))
-#define FillTMR0    (uint16_t) ((FSYS/(PollingTimeToFeq))/Timer0Rate)
-
+#define Timer0Rate  (Timer0PS+1)
+#define FillTMR0    ((uint16_t) 256-(((FSYS/PollingTimeToFeq)<<Timer0Rate)))
+//#define FillTMR0    (256-157)
 //OPTION_REG = 0x87;
 //TMR0 = 256- FillTMR0;
 //
@@ -39,7 +39,9 @@ typedef enum{
 
 
 extern void Init_TMR0(void);
-void RestoreTMR0(uint8_t count, uint8_t val);
+extern void RestoreTMR0(uint8_t value);
+extern void Init_TMR2(void);
+
 
 #ifdef	__cplusplus
 }
