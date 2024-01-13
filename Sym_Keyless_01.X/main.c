@@ -12,6 +12,7 @@
 #include "global.h"
 #include "ioports.h"
 #include "TMR.h"
+#include "adc.h"
 
 
 
@@ -25,7 +26,8 @@ void Init_SPI(void);
 int main(int argc, char** argv) {
     
     Init_ExtOsc();
-    Init_TMR0();
+    Init_ADC();
+    Init_TMR();
     Init_GPIO();
     Init_SPI();
     TRISA   = 0x00;

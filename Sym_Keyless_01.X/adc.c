@@ -68,7 +68,6 @@ void Init_ADC(void)
     ADC_pREF_VDD();
     ADCON2  = 0; //Disable Auto trigger 
     _Internal_ADC_ON(ENABLE);//Enable ADC module ~~ 
-    
 }
 
 
@@ -95,7 +94,6 @@ uint16_t Get_ADC_Result(void)
     _ADCResult.byte.MSB = ADRESH ;
     _ADCResult.byte.LSB = ADRESL ;
 
-    
     return _ADCResult.All;
             
 }
