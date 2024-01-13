@@ -24,6 +24,12 @@ extern "C" {
 #define Set_TMR0IE(n)   INTCONbits.T0IE = n
 #define Read_TMR0IF()   INTCONbits.TMR0IF
 #define CLS_TMR0IF()   INTCONbits.TMR0IF = 0 
+
+//--TMR1 interrupt--11
+#define Set_TMR1IE(n)   PIE1bits.TMR1IE = n
+#define Read_TMR1IF()   PIR1bits.TMR1IF
+#define CLS_TMR1IF()    PIR1bits.TMR1IF = 0 
+
  //--Extern modle Interrupt--//
 #define Set_INTE(n)   INTCONbits.INTE = n
 #define Read_INTF()   INTCONbits.INTF

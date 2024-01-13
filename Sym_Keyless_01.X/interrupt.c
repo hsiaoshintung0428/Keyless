@@ -20,22 +20,18 @@ void Init_Interttup(void)
 {
     Set_Globa_Interrupt(ENABLE);
     Set_Extern_Interrupt(ENABLE);
-//    Set_TMR0IE(DISABLE);
-//    RestoreTMR0(FillTMR0);
-//    Set_TMR0IE(ENABLE);
+    Set_TMR1IE(ENABLE);
+    CLS_TMR1IF();
 }
 
 
 void _INTERRUPT ISR(void)
 {
-    if(Read_TMR0IF())
+    if(Read_TMR1IF())
     {
-      Set_TMR0IE(DISABLE);
-      SetLAMP_Right(~Right);
-      SetLAMP_Left(~Left);
-      RestoreTMR0(FillTMR0);
-      CLS_TMR0IF();
-      Set_TMR0IE(ENABLE);
+        CLS_TMR1IF();
+        Run_TMR1(ENABLE , FillTMR1);
+        
     }
     
 }
