@@ -19,5 +19,15 @@ extern "C" {
 }
 #endif
 
+typedef enum{
+    PS_ON       = 0,
+    PS_Idle     = 1,
+    PS_Sleep    = 2,
+    PS_Off      = 3,   
+    PS_G3       = 0xFF //global reset        
+}_MCUPowerState;
+
+extern uint8_t PowerState;
+
 #endif	/* PROCESS_H */
 

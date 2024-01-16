@@ -46,7 +46,16 @@ extern "C" {
 #endif
 
 #define __MCU__     (_PIC16F1779_)
+    
+#if(__MCU__ == _PIC16F1779_) 
+    
+    #define FlashMaxSize 0x4000
+    #define HEFSpace 0x3F80 //0x3F80~0x3FFF (Spec table3-1)
+    #define RowWrite 32 //Spec table 10-1 one word 
+    #define MAXHEFblock ((0x4000-0x3F80)/RowWrite) //4 block~
 
+#endif    
+    
 #ifdef	__cplusplus
 }
 #endif

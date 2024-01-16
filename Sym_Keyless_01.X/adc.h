@@ -50,6 +50,13 @@ typedef enum{
     Channel_AN27     ,              
     }PIC_ADC_Channel;
 
+    
+#define ADC_PWR     Channel_AN9
+#define ADC_Seat    Channel_AN8
+#define ADC_OCP     Channel_AN14
+#define ADC_Vin     Channel_AN24
+#define ADC_IGN     Channel_AN26
+    
 extern void Init_ADC(void);
 extern int16_t Internal_ADC_Conversion (uint8_t channel, uint8_t Active );
 

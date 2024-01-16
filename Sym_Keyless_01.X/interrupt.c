@@ -31,6 +31,14 @@ void _INTERRUPT ISR(void)
     {
         CLS_TMR1IF();
         Run_TMR1(ENABLE , FillTMR1);
+    }
+    
+    if(Read_IOCIF())
+    {
+        //check power state... 
+        //first check power state
+        //if sleep state wake up MCU do something...
+        //if in on state do not thing??
         
     }
     

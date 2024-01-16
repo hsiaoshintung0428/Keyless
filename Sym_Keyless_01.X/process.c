@@ -11,6 +11,9 @@
 #include "global.h"
 #include "ioports.h"
 #include "TMR.h"
+#include "process.h"
+
+uint8_t PowerState = 0xFF;
 
 //龍頭解鎖
 void Unlock_Handle(void)

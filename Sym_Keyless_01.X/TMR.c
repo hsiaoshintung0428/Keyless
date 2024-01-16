@@ -77,7 +77,7 @@ void Init_TMR2(void)
     T2CLKCONbits.CS = 0x01; //FSYS
     T2CONbits.ON =0;
     T2CONbits.CKPS = 0x07;//1:128
-    T2CONbits.OUTPS =0x11;//1:10 
+    T2CONbits.OUTPS =0x09;//1:10 
 }
 
 void SetTMR2(uint8_t value)

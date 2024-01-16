@@ -19,7 +19,6 @@ extern "C" {
 #define Set_Globa_Interrupt(n)   INTCONbits.GIE = n
 #define Set_Extern_Interrupt(n)  INTCONbits.PEIE = n
 
-
  //---TMR0 interrupt--//
 #define Set_TMR0IE(n)   INTCONbits.T0IE = n
 #define Read_TMR0IF()   INTCONbits.TMR0IF
@@ -39,6 +38,57 @@ extern "C" {
 #define Read_IOCIF()   INTCONbits.IOCIF
 #define CLS_IOCIF()   INTCONbits.IOCIF = 0
  
+
+//typedef struct{
+//        uint8_t GPIO:1;
+//        uint8_t TMR1:1;
+//    }strFLAG;
+//    
+//typedef union{
+//
+//    uint16_t All;
+//    strFLAG _bits;
+//}_myInterruptFlag;
+
+
+    typedef struct{
+        uint8_t _GPIO:1;
+        uint8_t _TMR1:1;
+        uint8_t D2:1;
+        uint8_t D3:1;
+        
+        uint8_t D4:1;
+        uint8_t D5:1;
+        uint8_t D6:1;
+        uint8_t D7:1; 
+        
+        uint8_t D8:1;
+        uint8_t D9:1; 
+        uint8_t D10:1;
+        uint8_t D11:1;
+        
+         uint8_t D12:1; 
+         uint8_t D13:1; 
+         uint8_t D14:1; 
+         uint8_t D15:1;
+           
+    }strFLAG;
+    
+    typedef union{
+        uint16_t all;
+        strFLAG _bits;
+    }uniFLAG;
+
+
+
+////++++++++++++++++++++++++++++++++++++++++++++//
+//#ifndef _INTERRUPT_C
+//#define _INTERRUPT_C extern
+//#endif
+////++++++++++++++++++++++++++++++++++++++++++++//   
+//_INTERRUPT_C near _myInterruptFlag MYINTFLAG;
+uniFLAG mFLAG;
+
 extern void Init_Interttup(void);   
 //extern void __interrupt() ISR(void)
 

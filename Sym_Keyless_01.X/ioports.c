@@ -163,5 +163,15 @@ void Init_Sleep_GPIO(void)
         IOCEN   =   def_PORTE_Int_NEDGE;    //interrupt wareform falling edge 
         IOCEF   =   def_PORTE_Int_FLAG;     //interrupt flag must clear by software. 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+        
     #endif
+}
+
+void Remap_GPIO(void)
+{
+    UnlockIO(); //Unlock PPS mode
+    
+    LockIO();
+    
+    
 }

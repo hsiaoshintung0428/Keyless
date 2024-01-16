@@ -492,6 +492,7 @@ typedef enum
 
 extern void Init_GPIO(void);
 extern void Init_Sleep_GPIO(void);
+extern void Remap_GPIO(void);
 
 
 #endif	/* IOPORTS_H */

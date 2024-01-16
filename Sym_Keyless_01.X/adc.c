@@ -102,7 +102,7 @@ uint16_t Internal_ADC_Conversion (uint8_t channel, uint8_t Active )
 {
     uint16_t date =0;
     
-    if(Active =ENABLE)
+    if(Active == ENABLE)
     {
         Trigger_ADC(channel);
         date    =   Get_ADC_Result();
