@@ -22,6 +22,7 @@ void Set_TMR1(uint16_t value);
 void Init_TMR(void)
 {
     Init_TMR1();
+    Init_TMR2();
 }
 
 void Init_TMR0(void)
@@ -40,10 +41,10 @@ void RestoreTMR0(uint8_t value)
 
 void Init_TMR1(void)
 {
-    Set_TMR1Source(TMR1_Source_CoreOSC);
+    Set_TMR1Source(TMR1_Source_InterLF);
     Set_TMR1Externalcircuit(DISABLE);
-    Set_TMR1ScaleOSC(TMR1Rate8);
-    Set_TMR1SYNCFOSC(ENABLE);
+    Set_TMR1ScaleOSC(TMR1Rate1);
+    Set_TMR1SYNCFOSC(DISABLE);
     T1GCON =0;
 }
 
@@ -74,18 +75,32 @@ void Run_TMR1(uint8_t value ,uint16_t count)
 
 void Init_TMR2(void)
 {
-    T2CLKCONbits.CS = 0x01; //FSYS
-    T2CONbits.ON =0;
+//    T2CLKCONbits.CS = 0x01; //FSYS
+    
+    T2CLKCON = 0x01;
+    T2HLT = 0x80;
+    T2RST = 0;
+    PIR1bits.TMR2IF = 0;
+    T2PR = 0xfa;
+    T2TMR = 0x00;
+    //T2CON = 0x80;
+    
     T2CONbits.CKPS = 0x07;//1:128
-    T2CONbits.OUTPS =0x09;//1:10 
+    T2CONbits.OUTPS =0x00;//1:1     
+    T2CONbits.ON =1;
+
+    
 }
 
 void SetTMR2(uint8_t value)
 {
+    T2PR=value;
+    TMR2 =0;
     
 }
 
 void Run_TMR2(uint8_t value ,uint8_t count)
 {
-    
+    SetTMR2(count);
+    T2CONbits.ON = value;
 }

@@ -30,9 +30,9 @@ extern "C" {
 #define CLS_TMR1IF()    PIR1bits.TMR1IF = 0 
 
  //--Extern modle Interrupt--//
-#define Set_INTE(n)   INTCONbits.INTE = n
-#define Read_INTF()   INTCONbits.INTF
-#define CLS_INTF()   INTCONbits.INTF = 0    
+#define Set_INTIE(n)   INTCONbits.INTE = n
+#define Read_INTIF()   INTCONbits.INTF
+#define CLS_INTIF()   INTCONbits.INTF = 0    
   //--GPIO change Interrupt--//
 #define Set_IOCIE(n)   INTCONbits.IOCIE = n
 #define Read_IOCIF()   INTCONbits.IOCIF
@@ -54,7 +54,7 @@ extern "C" {
     typedef struct{
         uint8_t _GPIO:1;
         uint8_t _TMR1:1;
-        uint8_t D2:1;
+        uint8_t _RFINT:1;
         uint8_t D3:1;
         
         uint8_t D4:1;
@@ -67,10 +67,10 @@ extern "C" {
         uint8_t D10:1;
         uint8_t D11:1;
         
-         uint8_t D12:1; 
-         uint8_t D13:1; 
-         uint8_t D14:1; 
-         uint8_t D15:1;
+        uint8_t D12:1; 
+        uint8_t D13:1; 
+        uint8_t D14:1; 
+        uint8_t D15:1;
            
     }strFLAG;
     
@@ -89,7 +89,7 @@ extern "C" {
 //_INTERRUPT_C near _myInterruptFlag MYINTFLAG;
 uniFLAG mFLAG;
 
-extern void Init_Interttup(void);   
+extern void Init_interrupt(void);   
 //extern void __interrupt() ISR(void)
 
 #endif	/* INTERRUPT_H */

@@ -87,22 +87,22 @@ extern "C" {
     enum { RESET=0,SET};
 	enum { FALSE=0,TRUE=1};
 
-    typedef  enum {ExtOSC_31KHz = 0,
-                   ExtOSC_31K25Hz = 2,
-                   ExtOSC_62K5Hz = 4,
-                   ExtOSC_125KHz = 5,
-                   ExtOSC_250KHz = 6,
-                   ExtOSC_500KHz = 7,
+     typedef  enum {IntOSC_31KHz = 0,
+                   IntOSC_31K25Hz = 2,
+                   IntOSC_62K5Hz = 4,
+                   IntOSC_125KHz = 5,
+                   IntOSC_250KHz = 6,
+                   IntOSC_500KHz = 7,
                    /*
                     * Reserver  8~10
                     */
-                   ExtOSC_1MHz = 11,
-                   ExtOSC_2MHz = 12,
-                   ExtOSC_4MHz = 13,
-                   ExtOSC_8MHz = 14,
-                   ExtOSC_32MHz = 14,
-                   ExtOSC_16MHz = 15,
-                  }MCU_ExtOsc;
+                   IntOSC_1MHz = 11,
+                   IntOSC_2MHz = 12,
+                   IntOSC_4MHz = 13,
+                   IntOSC_8MHz = 14,
+                   IntOSC_16MHz = 15,
+                  }_MCU_IntOsc;
+
 
 /*=======================================================================*/
 	#define U8toBCD( num )  (((((num)/10)<<4)+((num)%10)))
@@ -113,7 +113,7 @@ extern "C" {
 	#define DECtoASC( dec ) ((dec)+'0')
 /*-----------------------------------------------------------------------*/	
 /*=======================================================================*/
-#define BITn( b )       (1UL<<(b))      /* note: force to U8/U16/U32 to get better optimization */
+#define BITn( b )       MASK(b)      /* note: force to U8/U16/U32 to get better optimization */
 #define BIT0            ((U8)BITn(0))
 #define BIT1            ((U8)BITn(1))
 #define BIT2            ((U8)BITn(2))

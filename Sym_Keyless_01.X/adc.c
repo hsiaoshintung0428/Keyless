@@ -10,36 +10,7 @@
 #define _Internal_ADC_DONE()        (!ADCON0bits.GO )
 #define _INternal_ADC_Channel(n)    (ADCON0bits.CHS = n)   
 
-//typedef enum{
-//    Channel_AN0 =0  ,
-//    Channel_AN1     ,
-//    Channel_AN2     ,  
-//    Channel_AN3     ,  
-//    Channel_AN4     ,
-//    Channel_AN5     ,  
-//    Channel_AN6     ,
-//    Channel_AN7     ,  
-//    Channel_AN8     ,
-//    Channel_AN9     ,
-//    Channel_AN10     ,  
-//    Channel_AN11     ,  
-//    Channel_AN12     ,
-//    Channel_AN13     ,  
-//    Channel_AN14     ,
-//    Channel_AN15     ,  
-//    Channel_AN16     ,
-//    Channel_AN17     ,
-//    Channel_AN18     ,  
-//    Channel_AN19     ,  
-//    Channel_AN20     ,
-//    Channel_AN21     ,  
-//    Channel_AN22     ,
-//    Channel_AN23     ,  
-//    Channel_AN24     , 
-//    Channel_AN25     ,
-//    Channel_AN26     ,  
-//    Channel_AN27     ,              
-//    }PIC_ADC_Channel;
+
 
 #define ADC_Right_justified()   ADCON1bits.ADFM=1   //ADC result formal right
 #define ADC_Left_justified()    ADCON1bits.ADFM=0
@@ -62,6 +33,7 @@
     
 void Init_ADC(void)
 {
+    ANSELC = 0;
     ADC_Right_justified();
     ADC_CLOCK_FOSC16();
     ADC_nREF_VSS();

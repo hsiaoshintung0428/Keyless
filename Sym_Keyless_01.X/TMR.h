@@ -26,9 +26,15 @@ typedef enum{
 
 #define PollingTime 10 //mS 
 #define PollingTimeToFeq    (1000uL/PollingTime)
-#define TMR1PS      TMR1Rate8
-#define FillTMR1    (uint16_t) (0xFFFF-((FSYS>>TMR1Rate8)/PollingTimeToFeq))
+#define TMR1PS      TMR1Rate1
+#define FillTMR1    (uint16_t) (0xFFFF-((INTLFOSC>>TMR1PS)/PollingTimeToFeq))
 
+
+#define TMR2INPS 128 //1,4,16,64
+#define TMR2OUTPS  1  //1~16
+
+#define TMR2Freq  125 //Hz
+#define TMR2Reg   0xFF-(((FSYS/(TMR2INPS*TMR2OUTPS))/TMR2Freq)-1)
 
 
 //#define Timer0PS    TMR0Rate256
@@ -49,10 +55,10 @@ typedef enum{
 }_TMR1CKPS; 
 
 typedef enum{
-    TMR1_Source_InterLF = 0,//internal Low power 31kHz 
-    TMR1_Source_ExterLF  = 1,//External Low power 32kHz   
-    TMR1_Source_SysOSC= 2,  //FOSC
-    TMR1_Source_CoreOSC =3, //FOSC/4  
+    TMR1_Source_InterLF = 3,//internal Low power 31kHz 
+    TMR1_Source_ExterLF  = 2,//External Low power 32kHz   
+    TMR1_Source_SysOSC= 1,  //FOSC
+    TMR1_Source_CoreOSC =0, //FOSC/4  
 }_TMR1Source; 
 
 //--- TMR0 ----//

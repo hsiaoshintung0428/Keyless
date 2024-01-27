@@ -22,17 +22,18 @@ extern "C" {
 #define MCUFAMILY _PIC16_
 #define EnablePLL	1
 #if(EnablePLL)
-	#define FOSC	(4*8000000uL)
+	#define mFOSC	(4*8000000uL)
 #else
-	#define FOSC	8000000h
+	#define mFOSC	8000000h
 #endif
 
 #if( (MCUFAMILY == _PIC18_ )|| (MCUFAMILY == _PIC16_))
-	#define FSYS	(FOSC/4)
+	#define FSYS	(mFOSC/4)
+    #define INTLFOSC    31000 //LFINTOSC almost equal 31Khz
 #elif( (MCUFAMILY == _PIC24_ )|| (MCUFAMILY == _DSPIC_))
-	#define FSYS	(FOSC/2)
+	#define FSYS	(mFOSC/2)
 #elif(MCUFAMILY == _PIC32_ )
-	#define FSYS	(FOSC/1)
+	#define FSYS	(mFOSC/1)
 #else
  #error MCU not correctly defined
 #endif

@@ -87,6 +87,7 @@ void Init_GPIO(void)
         IOCEN   =   def_PORTE_Int_NEDGE;    //interrupt wareform falling edge 
         IOCEF   =   def_PORTE_Int_FLAG;     //interrupt flag must clear by software. 
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+        OPTION_REGbits.nWPUEN = 0;
     #endif
 }
 
@@ -170,8 +171,13 @@ void Init_Sleep_GPIO(void)
 void Remap_GPIO(void)
 {
     UnlockIO(); //Unlock PPS mode
-    
+    //--input
+    T4INPPS = ppsOutmap(_ppsPORTA_,_ppsPIN0_);//PWM Detect -> RA0(TMR4 input)
+    INTPPS = ppsOutmap(_ppsPORTD_,_ppsPIN5_);//PWNAD->RD5(INT0) 
+    //-Output
+    RB0PPS = _pps_Out_PWM9_ ;//n125K(PWM9)->RB1
+    RD2PPS = _pps_Out_PWM4_ ;//BlueLed(PWM4) ->RD2
+  
     LockIO();
-    
     
 }
