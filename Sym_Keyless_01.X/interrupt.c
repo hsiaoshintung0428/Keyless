@@ -9,9 +9,12 @@
 #include <xc.h>
 #include "mcu.h"
 #include "global.h"
-#include "interrupt.h"
 #include "TMR.h"
+#include "interrupt.h"
 #include "ioports.h"
+
+
+extern void RestoreTMR0(uint8_t value , uint8_t EN);
 
 uint8_t Right =0;
 uint8_t Left =1;
@@ -35,7 +38,7 @@ void Init_interrupt(void)
     CLS_TMR1IF();
     CLS_IOCIF();
     
-    Run_TMR1(ENABLE , FillTMR1);
+    Run_TMR1(FillTMR1,ENABLE);
 }
 
 /*
@@ -48,6 +51,12 @@ void Init_interrupt(void)
  uint8_t Trigger = 0;
 void _INTERRUPT ISR(void)
 {
+    if(Read_TMR0IF()) 
+    {
+      RestoreTMR0(FillTMR0, ENABLE);
+      _GPIOTimeCount++;
+    }
+    
     if(Read_TMR1IF())
     { 
         mFLAG._bits._TMR1 = ENABLE;
@@ -56,11 +65,12 @@ void _INTERRUPT ISR(void)
     //Iinterrupt from SPI int(RB3)
     if(Read_IOCIF())
     {
-        //check power state... 
-        //first check power state
-        //if sleep state wake up MCU do something...
-        //if in on state do not thing??
-        mFLAG._bits._GPIO = ENABLE;//Set interrupt GPIO flag
+        mFLAG._bits._GPIO = ENABLE;
+        if(mGPIOState._bits.Wait)
+        {
+            
+        }
+        _GPIOTMR0CLR  = ENABLE; 
         CLS_IOCIF();
         
     }

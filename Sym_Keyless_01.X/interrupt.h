@@ -37,6 +37,8 @@ extern "C" {
 #define Set_IOCIE(n)   INTCONbits.IOCIE = n
 #define Read_IOCIF()   INTCONbits.IOCIF
 #define CLS_IOCIF()   INTCONbits.IOCIF = 0
+
+
  
 
 //typedef struct{
@@ -50,6 +52,25 @@ extern "C" {
 //    strFLAG _bits;
 //}_myInterruptFlag;
 
+    typedef struct{
+        uint8_t Pause:1;
+        uint8_t Wait:1;
+        uint8_t UnLock:1;
+        uint8_t Block:1;
+        
+        uint8_t CLRTMR0:1;
+        uint8_t D5:1;
+        uint8_t D6:1;
+        uint8_t D7:1; 
+        
+        uint8_t _Count:8; 
+    }strGPIOState;
+    
+    typedef union{
+        uint16_t all;
+        strGPIOState _bits;
+    }uniGPIO;
+    
 
     typedef struct{
         uint8_t _GPIO:1;
@@ -88,6 +109,11 @@ extern "C" {
 ////++++++++++++++++++++++++++++++++++++++++++++//   
 //_INTERRUPT_C near _myInterruptFlag MYINTFLAG;
 uniFLAG mFLAG;
+uniGPIO mGPIOState;
+
+#define _GPIOTimeCount  mGPIOState._bits._Count 
+#define _GPIOBlock      mGPIOState._bits.Block
+#define _GPIOTMR0CLR    mGPIOState._bits.CLRTMR0   
 
 extern void Init_interrupt(void);   
 //extern void __interrupt() ISR(void)
