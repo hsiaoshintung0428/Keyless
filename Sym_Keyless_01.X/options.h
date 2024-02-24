@@ -15,6 +15,7 @@ extern "C" {
 #ifdef	__cplusplus
 }
 #endif
+
 //--stand by 
 #define PWR_PressTime_Limit     300     //Press power button time more than 300ms to recognized 
 #define PWR_Failure_WaitTime    720     //Press power button small than PWR_PressTime_Limit wait 720 ms into Sleep mode 
@@ -39,6 +40,9 @@ extern "C" {
 #define Learn_WaitBlinkTime 300
 #define Learn_BlinkTime     100
 
+
+//debug mode 
+#define DBG_Token      1
 
 
 #endif	/* OPTIONS_H */
