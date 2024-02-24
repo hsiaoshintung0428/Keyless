@@ -10,6 +10,8 @@
 #include <xc.h>
 #include "config.h"
 #include "global.h"
+#include "options.h"
+#include "delay.h"
 #include "interrupt.h"
 #include "ioports.h"
 #include "TMR.h"
@@ -18,10 +20,9 @@
 #include "process.h"
 #include "hef.h"
 
-
-
-
-
+uint8_t _GPIOTimeCount=0;
+uint8_t _GPIOState=0;
+uint8_t _GPIOBlock = 0;
 
 void Init_ExtOsc(void);
 void Init_SPI(void);
@@ -29,10 +30,8 @@ void Init_SPI(void);
 /*
  * 
  */
-int main(int argc, char** argv) {
-    
-    uint8_t Duty_temp = 0;
-    
+int main(int argc, char** argv) 
+{
     Init_ExtOsc();
     Init_ADC();
     Init_TMR();
@@ -40,22 +39,9 @@ int main(int argc, char** argv) {
     Remap_GPIO();
     Init_SPI();
     Init_PWM();
-    
     FlashUnlock();
-    
-    LATC |= 0x81;//L_Lamp & R_Lamp
-    TRISC |=0x7E; 
-
     Init_interrupt();
-    mFLAG.all = 0;
-    mFLAG._bits._TMR1 = 0;
-    
-    
-    LATAbits.LATA3 =1 ;
-    TRISAbits.TRISA3 = 0;
-   // Set_PWM(4,50);
-    
-
+   
     if(PowerState == PS_G3)//when system resume from G3
     {
         
@@ -64,14 +50,46 @@ int main(int argc, char** argv) {
     
     while(1)
     {
-        Set_PWM_Duty(PWM_Channel_4,Duty_temp);
-        Duty_temp++;
-        if( mFLAG._bits._GPIO )
+        if((mFLAG._bits._RFINT) || (mFLAG._bits._GPIO) )//中斷喚醒
         {
+            switch(PowerState)
+            {
+                case 0: //解鎖
+                    //按壓 POWER BUTTON 時間大於 0.3 秒時，控制器會執行身份辨識動作
+                    //若小於 0.3 則等 0.72 秒後回休眠
+                    //搜尋遙控器，在搜尋範圍內，進行遠程身份辨識
+                    //若搜尋不到配對遙控器，控制器不做任何動作
+                    //若連續 8 次按壓 POWER BUTTON 都搜尋不到遙控器，系統將進入 10 秒不動作，已進行省電10 秒後重新累計 8 次
+                    //每次回到待機休眠模式，8 次計數將歸零
+                    //10 秒內統計按 8 次，每次搜尋 16 次。省電 10 秒後重新累計。
+                    if(mFLAG._bits._GPIO && (!_GPIOBlock) )//GPIO可用
+                    {
+                        if(_GPIOTimeCount >= (PWR_PressTime_Limit/PollingTime))//判斷時間是否大於300mS
+                        {
+                            if( ISPWRON() == DISABLE )//判斷GPIO狀態
+                            {
+                             _GPIOState = TRUE;
+                            }
+                            else//
+                            {
+                             _GPIOState = FALSE;   
+                             _GPIOBlock = TRUE;
+                            }
+                        }                                                       
+                    }
+                    break;
+                    
+                case 1://上鎖
+                    break;
+                    
+                case 2://學習
+                    break;
+                    
+                case 3://關機
+                    break;
+            }
             
         }
-//        if(Duty_temp > 100)
-//            Duty_temp = 0;
     }
 
     return (EXIT_SUCCESS);
@@ -96,9 +114,11 @@ void Init_ExtOsc(void)
     // SBOREN disabled; BORFS disabled; 
     BORCON = 0x00;
     // Wait for PLL to stabilize
+#if (!DBG_Token)    
     while(PLLR == 0)
     {
     }    
+#endif    
 }
 
 /*
