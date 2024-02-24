@@ -11,32 +11,36 @@
 #include "mcu.h"
 #include "global.h"
 #include "TMR.h"
+#include "interrupt.h"
 
 
 
-
+void Init_TMR0(void);
 void Init_TMR1(void);
 void Set_TMR1(uint16_t value);
+
 
 //
 void Init_TMR(void)
 {
+    Init_TMR0();
     Init_TMR1();
     Init_TMR2();
 }
 
 void Init_TMR0(void)
 {
-//    OPTION_REGbits.PS   = Timer0PS;
-//    OPTION_REGbits.PSA = ENABLE;
-//    OPTION_REGbits.T0CS = 0;
-
+    OPTION_REGbits.PS   = Timer0PS;
+    OPTION_REGbits.PSA = 0;
+    OPTION_REGbits.T0CS = 0;
 }
-//
-void RestoreTMR0(uint8_t value)
+
+void RestoreTMR0(uint8_t value , uint8_t EN)
 {
-    TMR0 = value;
- 
+    Set_TMR0IE(DISABLE);//停用TMR0 中斷
+    CLS_TMR0IF();//清除TMR0中斷旗標
+    TMR0 = value; //設定TMR0 計數
+    Set_TMR0IE(EN);//啟用TMR0 中斷
 }
 
 void Init_TMR1(void)
@@ -64,10 +68,10 @@ void Set_TMR1(uint16_t value)
     TMR1L = _TMR1Count.byte.LSB;
 }
 
-void Run_TMR1(uint8_t value ,uint16_t count)
+void Run_TMR1(uint16_t count,uint8_t EN)
 {
     Set_TMR1(count);
-    Set_TMR1ON(value);
+    Set_TMR1ON(EN);
 }
 
 
@@ -99,8 +103,8 @@ void SetTMR2(uint8_t value)
     
 }
 
-void Run_TMR2(uint8_t value ,uint8_t count)
+void Run_TMR2(uint8_t count,uint8_t EN)
 {
     SetTMR2(count);
-    T2CONbits.ON = value;
+    T2CONbits.ON = EN;
 }
