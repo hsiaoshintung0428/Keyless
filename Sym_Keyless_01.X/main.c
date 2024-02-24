@@ -20,10 +20,6 @@
 #include "process.h"
 #include "hef.h"
 
-uint8_t _GPIOTimeCount=0;
-uint8_t _GPIOState=0;
-uint8_t _GPIOBlock = 0;
-
 void Init_ExtOsc(void);
 void Init_SPI(void);
 
@@ -62,35 +58,60 @@ int main(int argc, char** argv)
                     //若連續 8 次按壓 POWER BUTTON 都搜尋不到遙控器，系統將進入 10 秒不動作，已進行省電10 秒後重新累計 8 次
                     //每次回到待機休眠模式，8 次計數將歸零
                     //10 秒內統計按 8 次，每次搜尋 16 次。省電 10 秒後重新累計。
-                    if(mFLAG._bits._GPIO && (!_GPIOBlock) )//GPIO可用
+                    if(_GPIOTMR0CLR)//啟用TMR0計數
                     {
-                        if(_GPIOTimeCount >= (PWR_PressTime_Limit/PollingTime))//判斷時間是否大於300mS
-                        {
-                            if( ISPWRON() == DISABLE )//判斷GPIO狀態
-                            {
-                             _GPIOState = TRUE;
-                            }
-                            else//
-                            {
-                             _GPIOState = FALSE;   
-                             _GPIOBlock = TRUE;
-                            }
-                        }                                                       
+                      _GPIOTMR0CLR = DISABLE ;//清除TMR0 啟用旗標
+                      RestoreTMR0(FillTMR0,ENABLE);//5mS,啟用TMR0中斷
                     }
-                    break;
                     
+                    if(mFLAG._bits._GPIO 
+                       && (!_GPIOBlock)
+                       && (ISPWRON() == HiVoltage))//GPIO中斷啟用 && GPIO block 未被啟用 && 釋放按鍵 
+                    {
+                        if((_GPIOTimeCount <= (PWR_PressTime_Limit/TMR0PollingTime)))//小於300 ms
+                        {
+               
+                                mGPIOState._bits.Wait = ENABLE; //啟用720ms等待
+                                _GPIOTimeCount = 0;
+                                RestoreTMR0(FillTMR0,ENABLE);//5mS,啟用TMR0中斷
+                                //計算錯誤次數
+                        }
+                        else if(_GPIOTimeCount >= (PWR_PressTime_Limit/TMR0PollingTime))//大於300 ms
+                        {   
+                             RestoreTMR0(FillTMR0,DISABLE);//5mS,停用TMR0中斷//停用TMR0 中斷
+                             //檢查keyless 
+                             mGPIOState._bits.Wait = DISABLE;
+                             mGPIOState._bits.UnLock = ENABLE;//啟動解鎖
+                             mFLAG._bits._GPIO  = DISABLE ;//清除GPIO判斷旗標
+                            _GPIOTimeCount =0;
+                        }                            
+                    }
+                    
+                    if( (mGPIOState._bits.Wait) 
+                        &&(_GPIOTimeCount >= (PWR_Failure_WaitTime/TMR0PollingTime)))//啟動720mS未等待    
+
+                      {
+                          mGPIOState._bits.Wait = 0;
+                          PowerState = 3;//關機程序
+                      }
+                    
+                    break;//end case 0
+                //    
                 case 1://上鎖
-                    break;
+                    break;//end case 1
                     
                 case 2://學習
-                    break;
+                    break;//end case 2
                     
                 case 3://關機
-                    break;
-            }
+                    break;//end case 3
+            }//end switch(PowerState)
             
-        }
-    }
+        }//end中斷喚醒
+        
+        
+        
+    }//end while(1)
 
     return (EXIT_SUCCESS);
 }

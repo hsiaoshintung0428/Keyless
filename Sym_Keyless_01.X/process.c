@@ -30,14 +30,12 @@ void DRV8872_Brake(void);
 
 //龍頭解鎖
 void Unlock_Handle(void)
-{   
-    stuTHCML *th;
-    th->date.dt.day =1;
-    
+{       
     DRV8872_WakeUp();
     _delay1uS(50);
     DRV8872_Forward();
     _delay1mS(40);
+    
 }
 
 //龍頭上鎖

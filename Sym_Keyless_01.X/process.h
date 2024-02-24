@@ -34,31 +34,32 @@ typedef enum{
 }_DirectionLamp;
 extern uint8_t PowerState;
 
-typedef enum { ndtYear, ndtMonth, ndtDay, ndtHour, ndtMinute, ndtSecond, MAXndtDATE } seqDATE;
-typedef union  {
-                          U8 n[MAXndtDATE];
-                          struct {
-                                    U8 year;   // 0..99 for 2000..2099
-                                    U8 month;  // 1..12
-                                    U8 day;    // 1..31
-                                    U8 hour;   // 0..23
-                                    U8 minute; // 0..59
-                                    U8 second; // 0..59
-                                 } dt;
-                       } stuDATE  ,mDate;       
-typedef enum { ntkTEMP, ntkRH, ntkCO2, MAXntkTHCMLKIND } seqTHCMLKIND;                       
-typedef union  {
-                          S16 va[MAXntkTHCMLKIND];
-                          struct {
-                                    S16 TEMP;
-                                    U16 RH;
-                                    U16 CO2;
-                                 } kd;
-                       } stuValueTHCML;
-typedef struct {
-                         stuValueTHCML value;
-                               stuDATE date;
-                       } stuTHCML;
+
+//typedef enum { ndtYear, ndtMonth, ndtDay, ndtHour, ndtMinute, ndtSecond, MAXndtDATE } seqDATE;
+//typedef union  {
+//                          U8 n[MAXndtDATE];
+//                          struct {
+//                                    U8 year;   // 0..99 for 2000..2099
+//                                    U8 month;  // 1..12
+//                                    U8 day;    // 1..31
+//                                    U8 hour;   // 0..23
+//                                    U8 minute; // 0..59
+//                                    U8 second; // 0..59
+//                                 } dt;
+//                       } stuDATE  ,mDate;       
+//typedef enum { ntkTEMP, ntkRH, ntkCO2, MAXntkTHCMLKIND } seqTHCMLKIND;                       
+//typedef union  {
+//                          S16 va[MAXntkTHCMLKIND];
+//                          struct {
+//                                    S16 TEMP;
+//                                    U16 RH;
+//                                    U16 CO2;
+//                                 } kd;
+//                       } stuValueTHCML;
+//typedef struct {
+//                         stuValueTHCML value;
+//                               stuDATE date;
+//                       } stuTHCML;
 
 extern void Unlock_Handle(void);
 extern void Lock_Handle(void);
