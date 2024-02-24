@@ -79,6 +79,8 @@ extern "C" {
 	#define NOP8()		NOP4();NOP4();
 	#define NOP16()		NOP8();NOP8();
 	#define NOP32()		NOP16();NOP16();
+    
+    #define Second2minscond(n)      (n*1000)
 	
 	enum { DISABLE=0,ENABLE=1};	
 	enum { NO=0, YES=1 };
