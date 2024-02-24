@@ -178,6 +178,7 @@ extern "C" {
 #define pbmPWRADC     BITn(pbnSEATDET)
 #define adPWRADC      9  
 
+ #define ISPWRON()   (PORTBbits.RB3) 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptUART       PORTB   
 #define piUART       PORTB
