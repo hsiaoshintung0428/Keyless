@@ -36,12 +36,17 @@ extern "C" {
 	typedef int32_t  s32;
 	typedef int16_t  s16; 
 	typedef int8_t   s8;
+    
+    typedef int32_t  INT32_t;
+	typedef int16_t  INT16_t;
+	typedef int8_t   INT8_t;
 	
 	/*!< Unsigned integer types  */
 	typedef unsigned char     uint8_t;
 	typedef unsigned short    uint16_t;
 	typedef unsigned long     uint32_t;
 		
+    
 	typedef unsigned char     U8;
 	typedef unsigned short    U16;
 	typedef unsigned long     U32;
@@ -50,6 +55,9 @@ extern "C" {
 	typedef uint16_t  u16;
 	typedef uint8_t   u8;
 	
+    typedef uint32_t  UINT32_t;
+	typedef uint16_t  UINT16_t;
+	typedef uint8_t   UINT8_t;
 
 	
 	typedef                float   FLOAT;
@@ -71,6 +79,8 @@ extern "C" {
 	#define NOP8()		NOP4();NOP4();
 	#define NOP16()		NOP8();NOP8();
 	#define NOP32()		NOP16();NOP16();
+    
+    #define Second2minscond(n)      (n*1000)
 	
 	enum { DISABLE=0,ENABLE=1};	
 	enum { NO=0, YES=1 };
@@ -78,23 +88,29 @@ extern "C" {
 	enum { PASS=0, BUSY=1, FAIL=1 };
     enum { RESET=0,SET};
 	enum { FALSE=0,TRUE=1};
+    enum {LoVoltage =0,HiVoltage =1};
 
-    typedef  enum {ExtOSC_31KHz = 0,
-                   ExtOSC_31K25Hz = 2,
-                   ExtOSC_62K5Hz = 4,
-                   ExtOSC_125KHz = 5,
-                   ExtOSC_250KHz = 6,
-                   ExtOSC_500KHz = 7,
+     typedef  enum {IntOSC_31KHz = 0,
+                   IntOSC_31K25Hz = 2,
+                   IntOSC_62K5Hz = 4,
+                   IntOSC_125KHz = 5,
+                   IntOSC_250KHz = 6,
+                   IntOSC_500KHz = 7,
                    /*
                     * Reserver  8~10
                     */
-                   ExtOSC_1MHz = 11,
-                   ExtOSC_2MHz = 12,
-                   ExtOSC_4MHz = 13,
-                   ExtOSC_8MHz = 14,
-                   ExtOSC_32MHz = 14,
-                   ExtOSC_16MHz = 15,
-                  }MCU_ExtOsc;
+                   IntOSC_1MHz = 11,
+                   IntOSC_2MHz = 12,
+                   IntOSC_4MHz = 13,
+                   IntOSC_8MHz = 14,
+                   IntOSC_16MHz = 15,
+                  }_MCU_IntOsc;
+
+typedef union
+{
+    uint16_t w;
+    struct {uint8_t lsb, msb;} b;
+} word;
 
 /*=======================================================================*/
 	#define U8toBCD( num )  (((((num)/10)<<4)+((num)%10)))
@@ -105,7 +121,7 @@ extern "C" {
 	#define DECtoASC( dec ) ((dec)+'0')
 /*-----------------------------------------------------------------------*/	
 /*=======================================================================*/
-#define BITn( b )       (1UL<<(b))      /* note: force to U8/U16/U32 to get better optimization */
+#define BITn( b )       MASK(b)      /* note: force to U8/U16/U32 to get better optimization */
 #define BIT0            ((U8)BITn(0))
 #define BIT1            ((U8)BITn(1))
 #define BIT2            ((U8)BITn(2))

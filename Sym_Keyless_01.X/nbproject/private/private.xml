@@ -2,6 +2,26 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/delay.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/spi.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/ioports.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/uart.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/hef.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/config.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/ioports.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/HEF.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/main.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/mcu.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/ata5781.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/uart.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/interrupt.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/process.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/adc.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/global.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/ata5781.h</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/pwm.c</file>
+            <file>file:/D:/SYM_keyless/SYM/Keyless/Sym_Keyless_01.X_0413/Sym_Keyless_01.X/adc.h</file>
+        </group>
     </open-files>
 </project-private>
