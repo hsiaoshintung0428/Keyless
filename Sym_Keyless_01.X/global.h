@@ -2,7 +2,7 @@
  * File:   global.h
  * Author: HSIAO HSIN-TUNG at CHELIC CO.,Ltd.
  *
- * Created on 2020年8月28日, 上午 8:00
+ * Created on 
  */
 
 #ifndef GLOBAL_H

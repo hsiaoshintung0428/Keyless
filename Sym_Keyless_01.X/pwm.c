@@ -2,7 +2,7 @@
  * File:   pwm.c
  * Author: Norton.Hsioa
  *
- * Created on October 8, 2023, 10:28 PM
+ * Created on 
  */
 
 #include <stdio.h>

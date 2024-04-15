@@ -1,8 +1,8 @@
 /* 
  * File:   hef.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年1月23日, 下午 10:36
+ * Created on 
  */
 
 #ifndef HEF_H

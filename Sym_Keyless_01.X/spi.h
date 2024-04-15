@@ -1,8 +1,8 @@
 /* 
  * File:   spi.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年4月11日, 下午 10:00
+ * Created on 
  */
 
 #ifndef SPI_H

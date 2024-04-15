@@ -2,11 +2,12 @@
  * File:   main.c
  * Author: Norton.Hsioa
  *
- * Created on October 8, 2023, 10:28 PM
- * 20240414
+ * Created on 
+ * 20240415
  *完成模組 ADC 可動作, RB3可用中斷處理
  *  代辦事項 
- *  檢查解上鎖功能
+ *  檢查解上鎖功能 確認DRV8872動作!!
+ * 修改部分macro 設定
  * 
  */
 
@@ -53,8 +54,8 @@ int main(int argc, char** argv)
     Init_ATA5781();
     Init_uart();
     FlashUnlock();
-    //FlashWriteByte(HEFSPACE,0xAA);
-    //FlashWriteByte(HEFSPACE+1,0xAB);
+    DRV8872_Sleep();//<--強制Moto Controller休眠
+
    
     if(PowerState == PS_G3)//when system resume from G3
     {
@@ -79,9 +80,13 @@ int main(int argc, char** argv)
             {
               // aa= Internal_ADC_Conversion(ADC_PWR ,ENABLE); //抓ADC值
               // DumpintDec(aa);
-                Unlock_Handle();
+               Unlock_Handle();
+               
+               Lock_Handle();
                mFLAG._bits._GPIO = 0;
             }
+            PowerState = 5;
+            
             switch(PowerState)
             {
                 case 0: //解鎖

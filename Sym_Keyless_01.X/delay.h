@@ -1,8 +1,8 @@
 /* 
  * File:   delay.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年1月30日, 下午 9:53
+ * Created on 
  */
 
 #ifndef DELAY_H

@@ -1,8 +1,8 @@
 /* 
  * File:   adc.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年1月13日, 下午 11:03
+ * Created on 
  */
 
 #ifndef ADC_H

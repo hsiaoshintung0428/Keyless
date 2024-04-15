@@ -1,8 +1,8 @@
 /* 
  * File:   ioports.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2023年10月31日, 下午 9:49
+ * Created on 
  */
 
 #ifndef IOPORTS_H
@@ -67,7 +67,8 @@ extern "C" {
 #define pbnRPMDET   0
 #define pbmRPMDET   MASK(pbnRPMDET)
 
-#define ISRPMDET()   ((piRPMDET&pbmRPMDET)==pbmRPMDET)
+#define ISRPMDET()  (PORTAbits.RA0 == 1)
+//#define ISRPMDET()   ((piRPMDET&pbmRPMDET)==pbmRPMDET)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptSEATON    PORTA   //R.A2 = O/P(Digit) 
 #define piSEATON    PORTA   //Input register
@@ -76,10 +77,13 @@ extern "C" {
 #define pbnSEATON   2
 #define pbmSEATON   MASK(pbnSEATON)
 
-#define SetSEATON(a) { if(a)  ( set(poSEATON,MASK(pbnSEATON)) ) ; \
-                      else    ( clr(poSEATON,MASK(pbnSEATON)) ) ;}
+#define SetSEATON(a)    LATAbits.LATA2 = a
 
-#define ISSEATON()   ((piSEATON&pbmSEATON)==pbmSEATON)
+#define ISSEATON()  (PORTAbits.RA2 == 1)
+//#define SetSEATON(a) { if(a)  ( set(poSEATON,MASK(pbnSEATON)) ) ; \
+//                      else    ( clr(poSEATON,MASK(pbnSEATON)) ) ;}
+//
+//#define ISSEATON()   ((piSEATON&pbmSEATON)==pbmSEATON)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptIGNTON   PORTA   //R.A3 = O/P(Digit)
 #define piIGNON    PORTA
@@ -88,10 +92,13 @@ extern "C" {
 #define pbnIGNON   3
 #define pbmIGNON   MASK(pbnIGNON)
 
-#define SetIGNON(a) { if(a)  (set(poIGNON,MASK(pbnIGNON)));  \
-                      else    clr(poIGNON,MASK(pbnIGNON)))
+#define SetIGNON(a)  LATAbits.LATA3 = a
 
-#define ISIGNON()   ((piIGNON&pbmIGNON)==pbmIGNON)
+#define ISIGNON()    (PORTAbits.RA3 == 1)
+//#define SetIGNON(a) { if(a)  (set(poIGNON,MASK(pbnIGNON)));  \
+//                      else    clr(poIGNON,MASK(pbnIGNON)))
+//
+//#define ISIGNON()   ((piIGNON&pbmIGNON)==pbmIGNON)
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptRFRESET    PORTA   //R.A4 = O/P(Digit)
@@ -101,10 +108,13 @@ extern "C" {
 #define pbnRFRESET   4
 #define pbmRFRESET    MASK(pbnRFRESET)
 
-#define SetRFRESET(a)  {if(a)  (set(poRFRESET,MASK(pbnRFRESET)));   \
-                        else   (clr(poRFRESET,MASK(pbnRFRESET))); }
+#define SetRFRESET(a)   LATAbits.LATA4 = a
 
-#define ISRFRESET()   ((piRFRESET&pbmRFRESET)==pbmRFRESET)
+#define ISRFRESET() (PORTAbits.RA4 == 1)
+//#define SetRFRESET(a)  {if(a)  (set(poRFRESET,MASK(pbnRFRESET)));   \
+//                        else   (clr(poRFRESET,MASK(pbnRFRESET))); }
+//
+//#define ISRFRESET()   ((piRFRESET&pbmRFRESET)==pbmRFRESET)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptP_1    PORTA   //R.A5 = I/P(Digit)
 #define piP_1    PORTA
@@ -113,10 +123,13 @@ extern "C" {
 #define pbnP_1   5
 #define pbmP_1   MASK(pbnRFRESET)
 
-#define SetP_1(a) { if(a)  (set(poP_1,MASK(pbnP_1)));  \
-                    else   (set(poP_1,MASK(pbnP_1)));}
+#define SetP_1(a)   LATAbits.LATA5 = a
 
-#define ISP_1()   ((piP_1&pbmP_1)==pbmP_1)
+#define ISP_1()     (PORTAbits.RA5 == 1)
+//#define SetP_1(a) { if(a)  (set(poP_1,MASK(pbnP_1)));  \
+//                    else   (set(poP_1,MASK(pbnP_1)));}
+//
+//#define ISP_1()   ((piP_1&pbmP_1)==pbmP_1)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //PortA
 #define def_PORTA_DIR           ((uint8_t)0xFF & ~(pbmRPMDET|pbmP_1))  //TRISA 
@@ -138,11 +151,13 @@ extern "C" {
 #define pbnIMM0     0
 #define pbmIMMO     MASK(pbnIMM0)
 
+#define SetIMMOON(a) LATBbits.LATB0 = a 
 
-#define SetIMMOON(a) { if(a)  (set(poIMMO,MASK(pbnIMM0)));\
-                        else  (clr(poIMMO,MASK(pbnIMM0)));}
-
-#define ISIMMOON()   ((piIMMO&pbmIMMO)==pbmIMMO)
+#define ISIMMOON()  (PORTBbits.RB0 == 1)
+//#define SetIMMOON(a) { if(a)  (set(poIMMO,MASK(pbnIMM0)));\
+//                        else  (clr(poIMMO,MASK(pbnIMM0)));}
+//
+//#define ISIMMOON()   ((piIMMO&pbmIMMO)==pbmIMMO)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptN125K      PORTB   //R.B1 = O/P(Digit)  PWM mode??
 #define piN125K      PORTB
@@ -151,11 +166,13 @@ extern "C" {
 #define pbnN125K     1
 #define pbmN125K     MASK(pbnN125K)
 
+#define SetN125K(a) LATBbits.LATB1  = 1
 
-#define SetN125K(a) { if(a)   (set(poN125K,MASK(pbnN125K))); \
-                      else    (clr(poN125Ks,MASK(pbnN125K)));)}
+#define ISN125K()   (PORTBbits.RB1 == 1)
+//#define SetN125K(a) { if(a)   (set(poN125K,MASK(pbnN125K))); \
+//                      else    (clr(poN125Ks,MASK(pbnN125K)));)}
 
-#define ISN125K()   ((piN125K&pbmN125K)==pbmN125K)
+//#define ISN125K()   ((piN125K&pbmN125K)==pbmN125K)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptSEATDET      PORTB   //R.B2 = i/P(Digit)
 #define piSEATDET      PORTB
@@ -165,10 +182,13 @@ extern "C" {
 #define pbmSEATDET     MASK(pbnSEATDET)
 #define paSEATDET      
 
-#define SetSEATDET(a) { if(a)  (set(poSEATDET,MASK(pbnSEATDET))); \
-                        else   (clr(poSEATDET,MASK(pbnSEATDET)));;}
+#define SetSEATDET(a)   LATBbits.LATB2 = a
 
-#define ISSEATDET()   ((piSEATDET&pbmSEATDET)==pbmSEATDET)
+#define ISSEATDET()     (PORTBbits.RB2 == 1)
+//#define SetSEATDET(a) { if(a)  (set(poSEATDET,MASK(pbnSEATDET))); \
+//                        else   (clr(poSEATDET,MASK(pbnSEATDET)));;}
+//
+//#define ISSEATDET()   ((piSEATDET&pbmSEATDET)==pbmSEATDET)
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptPWRADC      PORTB   //R.B3 = i/P(analog)
 #define piPWRADC      PORTB
@@ -211,20 +231,15 @@ extern "C" {
 #define pbmLAMP_Right     BITn(pbnLAMP_Right)
 #define pbmLAMP_Left      BITn(pbnLAMP_Left)
 
-//#define SetLAMP_Right(a) { if(a)  (poLAMP|pbmLAMP_Right);  \
-//                           else   (poLAMP&(~pbmLAMP_Right));}
+
+#define SetLAMP_Right(a)  LATCbits.LATC0 = a           
+#define SetLAMP_Left(a)   LATCbits.LATC7 = a  
+
+//#define SetLAMP_Right(a)   if(a) set(poLAMP,MASK(pbnLAMP_Right));\
+//                           else  clr(poLAMP,MASK(pbnLAMP_Right)) ;
 //
-//#define SetLAMP_Left(a) { if(a)  (poLAMP|pbmLAMP_Left) ; \
-//                          else   (poLAMP&(~pbmLAMP_Left));}
-
-//#define SetLAMP_Right(a)  LATCbits.LATC0 = a           
-//#define SetLAMP_Left(a)   LATCbits.LATC7 = a  
-
-#define SetLAMP_Right(a)   if(a) set(poLAMP,MASK(pbnLAMP_Right));\
-                           else  clr(poLAMP,MASK(pbnLAMP_Right)) ;
-
-#define SetLAMP_Left(a)   if(a) set(poLAMP,MASK(pbnLAMP_Left));\
-                          else  clr(poLAMP,MASK(pbnLAMP_Left)) ;
+//#define SetLAMP_Left(a)   if(a) set(poLAMP,MASK(pbnLAMP_Left));\
+//                          else  clr(poLAMP,MASK(pbnLAMP_Left)) ;
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptBuzCon            PORTC   //RC.1 = O/P
 #define piBuzCon            PORTC
@@ -234,8 +249,9 @@ extern "C" {
 #define pbmBuzCon           BITn(pbnBuzCon)
 
 
-#define SetBuzCon(a) { if(a) ((set(poBuzCon,MASK(pbnBuzCon))); \
-                      else   (clr(poBuzCon,MASK(pbnBuzCon)));}
+#define SetBuzCon(a)    LATCbits.LATC1  = a
+//#define SetBuzCon(a) { if(a) ((set(poBuzCon,MASK(pbnBuzCon))); \
+//                      else   (clr(poBuzCon,MASK(pbnBuzCon)));}
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptOCPADC            PORTC   //RC.2 = I/P(Analog)
 #define piOCPADC            PORTC
@@ -257,13 +273,19 @@ extern "C" {
 #define pbmRFSPIMISO        BITn(pbnRFSPIMOSI)
 #define pbmRFSPIMOSI        BITn(pbnRFSPIMOSI)
 
-#define SetRFSPICLK(a) { if(a) (set(poRFSPI,MASK(pbnRFSPICLK))); \
-                         else  (clr(poRFSPI,MASK(pbnRFSPICLK)));}
+#define SetRFSPICLK(a)  LATCbits.LATC3 = a
 
-#define SetRFSPIMOSI(a) { if(a) (set(poRFSPI,MASK(pbnRFSPIMOSI))); \
-                          else  (clr(poRFSPI,MASK(pbnRFSPIMOSI)));}    
+#define SetRFSPIMOSI(a) LATCbits.LATC5 = a 
 
- #define ISRFSPIMISO()   ((piRFSPI&pbmRFSPIMISO)==pbmRFSPIMISO)        
+#define ISRFSPIMISO()  (PORTCbits.RC4 == 1)
+
+//#define SetRFSPICLK(a) { if(a) (set(poRFSPI,MASK(pbnRFSPICLK))); \
+//                         else  (clr(poRFSPI,MASK(pbnRFSPICLK)));}
+//
+//#define SetRFSPIMOSI(a) { if(a) (set(poRFSPI,MASK(pbnRFSPIMOSI))); \
+//                          else  (clr(poRFSPI,MASK(pbnRFSPIMOSI)));}    
+//
+// #define ISRFSPIMISO()   ((piRFSPI&pbmRFSPIMISO)==pbmRFSPIMISO)        
  /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptLearnMode           PORTC   //RC.6 = I/P(Digitai) need interrupt??
 #define piLearnMode           PORTC
@@ -272,8 +294,9 @@ extern "C" {
 #define pbnLearnMode            6
 #define pbmLearnMode           BITn(pbnLearnMode)
 
+#define ISLearnMode()       (PORTCbits.RC6 == 1)
 
- #define ISLearnMode()   ((piLearnMode&pbmLearnMode)==pbmLearnMode)  
+// #define ISLearnMode()   ((piLearnMode&pbmLearnMode)==pbmLearnMode)  
  
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 //PortC
@@ -298,9 +321,9 @@ extern "C" {
 #define pbnBlueLed           2
 #define pbmBlueLed           BITn(pbnBlueLed)
 
-
-#define SetBlueLed(a)       { if(a) (set(poBlueLed,MASK(pbnBlueLed)));  \
-                              else   (clr(poBlueLed,MASK(pbnBlueLed)));}                            
+#define SetBlueLed(a)       LATDbits.LATD2 = a
+//#define SetBlueLed(a)       { if(a) (set(poBlueLed,MASK(pbnBlueLed)));  \
+//                              else   (clr(poBlueLed,MASK(pbnBlueLed)));}                            
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptRFSPICS            PORTD   //RD.3 = O/P
 #define piRFSPICS            PORTD
@@ -309,9 +332,10 @@ extern "C" {
 #define pbnRFSPICS             3
 #define pbmRFSPICS          BITn(pbnRFSPICS)
 
+#define SetRFSPICS(a)   LATDbits.LATD3 = a
 
-#define SetRFSPICS(a)       { if(a) (set(poRFSPICS,MASK(pbnRFSPICS)));  \
-                              else  (clr(poRFSPICS,MASK(pbnRFSPICS)));}                            
+//#define SetRFSPICS(a)       { if(a) (set(poRFSPICS,MASK(pbnRFSPICS)));  \
+//                              else  (clr(poRFSPICS,MASK(pbnRFSPICS)));}                            
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptVINADC           PORTD   //RD.4 = I/P(Analog)
 #define piVINADC           PORTD
@@ -328,8 +352,8 @@ extern "C" {
 #define pbnRFPB6          5
 #define pbmRFPB6          BITn(pbnRFPB6)
 
-
- #define ISRFPB6()   ((poRFPB6&pbmRFPB6)==pbmRFPB6)  
+#define ISRFPB6()       (PORTDbits.RD5 == 1)
+// #define ISRFPB6()   ((poRFPB6&pbmRFPB6)==pbmRFPB6)  
  /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #define ptIGNADC           PORTD   //RD.6 = I/P(Analog)
 #define piIGNADC           PORTD

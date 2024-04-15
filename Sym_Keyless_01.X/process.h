@@ -1,8 +1,8 @@
 /* 
  * File:   process.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年1月6日, 下午 8:27
+ * Created on 
  */
 
 #ifndef PROCESS_H
@@ -63,6 +63,7 @@ extern uint8_t PowerState;
 
 extern void Unlock_Handle(void);
 extern void Lock_Handle(void);
+extern void DRV8872_Sleep(void);
 extern void Set_TurnSignal(uint8_t Dir, uint8_t control);
 #endif	/* PROCESS_H */
 

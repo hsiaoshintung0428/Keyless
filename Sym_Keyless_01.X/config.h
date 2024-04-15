@@ -1,8 +1,8 @@
 /* 
  * File:   config.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年1月7日, 下午 11:26
+ * Created on
  */
 
 #ifndef CONFIG_H

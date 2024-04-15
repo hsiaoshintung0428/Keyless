@@ -1,8 +1,8 @@
 /* 
  * File:   ata5781.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2024年4月11日, 下午 10:02
+ * Created on 
  */
 
 #ifndef ATA5781_H

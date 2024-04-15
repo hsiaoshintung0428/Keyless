@@ -1,8 +1,8 @@
 /* 
  * File:   interrupt.h
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2023年12月6日, 下午 10:25
+ * Created on 
  */
 
 #ifndef INTERRUPT_H

@@ -1,8 +1,8 @@
 /* 
  * File:   interrupt.c
- * Author: Varcolac_MV_SKU36
+ * Author: 
  *
- * Created on 2023年12月6日, 下午 10:25
+ * Created on 
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +37,7 @@ void Init_interrupt(void)
 //    Set_TMR1IE(ENABLE);
     Set_IOCIE(ENABLE);
     IOCBPbits.IOCBP3 = 1;
-    IOCBNbits.IOCBN3 = 1;
+    //IOCBNbits.IOCBN3 = 1;
     
     
     
@@ -81,6 +81,7 @@ void _INTERRUPT ISR(void)
             Putdata("IOCIF_L \n ");
         IOCBFbits.IOCBF3  = 0;
         mFLAG._bits._GPIO = ENABLE;
+        //Set_IOCIE(DISABLE);
         if(mGPIOState._bits.Wait)
         {
             
