@@ -19,6 +19,9 @@
       <itemPath>spi.h</itemPath>
       <itemPath>ata5781.h</itemPath>
       <itemPath>uart.h</itemPath>
+      <itemPath>ata_api_peps_handler.h</itemPath>
+      <itemPath>ata_api_crc.h</itemPath>
+      <itemPath>ata_api_aes.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -39,6 +42,9 @@
       <itemPath>delay.c</itemPath>
       <itemPath>ata5781.c</itemPath>
       <itemPath>uart.c</itemPath>
+      <itemPath>ata_api_peps_handler.c</itemPath>
+      <itemPath>ata_api_crc.c</itemPath>
+      <itemPath>ata_api_aes.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

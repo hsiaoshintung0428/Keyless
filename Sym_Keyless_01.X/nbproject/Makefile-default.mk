@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c ioports.c TMR.c interrupt.c process.c pwm.c spi.c adc.c HEF.c delay.c ata5781.c uart.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c ioports.c TMR.c interrupt.c process.c pwm.c spi.c adc.c HEF.c delay.c ata5781.c uart.c ata_api_peps_handler.c ata_api_crc.c ata_api_aes.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/ioports.p1 ${OBJECTDIR}/TMR.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/process.p1 ${OBJECTDIR}/pwm.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/adc.p1 ${OBJECTDIR}/HEF.p1 ${OBJECTDIR}/delay.p1 ${OBJECTDIR}/ata5781.p1 ${OBJECTDIR}/uart.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/ioports.p1.d ${OBJECTDIR}/TMR.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/process.p1.d ${OBJECTDIR}/pwm.p1.d ${OBJECTDIR}/spi.p1.d ${OBJECTDIR}/adc.p1.d ${OBJECTDIR}/HEF.p1.d ${OBJECTDIR}/delay.p1.d ${OBJECTDIR}/ata5781.p1.d ${OBJECTDIR}/uart.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/ioports.p1 ${OBJECTDIR}/TMR.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/process.p1 ${OBJECTDIR}/pwm.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/adc.p1 ${OBJECTDIR}/HEF.p1 ${OBJECTDIR}/delay.p1 ${OBJECTDIR}/ata5781.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/ata_api_peps_handler.p1 ${OBJECTDIR}/ata_api_crc.p1 ${OBJECTDIR}/ata_api_aes.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/ioports.p1.d ${OBJECTDIR}/TMR.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/process.p1.d ${OBJECTDIR}/pwm.p1.d ${OBJECTDIR}/spi.p1.d ${OBJECTDIR}/adc.p1.d ${OBJECTDIR}/HEF.p1.d ${OBJECTDIR}/delay.p1.d ${OBJECTDIR}/ata5781.p1.d ${OBJECTDIR}/uart.p1.d ${OBJECTDIR}/ata_api_peps_handler.p1.d ${OBJECTDIR}/ata_api_crc.p1.d ${OBJECTDIR}/ata_api_aes.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/ioports.p1 ${OBJECTDIR}/TMR.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/process.p1 ${OBJECTDIR}/pwm.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/adc.p1 ${OBJECTDIR}/HEF.p1 ${OBJECTDIR}/delay.p1 ${OBJECTDIR}/ata5781.p1 ${OBJECTDIR}/uart.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/ioports.p1 ${OBJECTDIR}/TMR.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/process.p1 ${OBJECTDIR}/pwm.p1 ${OBJECTDIR}/spi.p1 ${OBJECTDIR}/adc.p1 ${OBJECTDIR}/HEF.p1 ${OBJECTDIR}/delay.p1 ${OBJECTDIR}/ata5781.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/ata_api_peps_handler.p1 ${OBJECTDIR}/ata_api_crc.p1 ${OBJECTDIR}/ata_api_aes.p1
 
 # Source Files
-SOURCEFILES=main.c ioports.c TMR.c interrupt.c process.c pwm.c spi.c adc.c HEF.c delay.c ata5781.c uart.c
+SOURCEFILES=main.c ioports.c TMR.c interrupt.c process.c pwm.c spi.c adc.c HEF.c delay.c ata5781.c uart.c ata_api_peps_handler.c ata_api_crc.c ata_api_aes.c
 
 
 
@@ -184,6 +184,30 @@ ${OBJECTDIR}/uart.p1: uart.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/uart.d ${OBJECTDIR}/uart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/ata_api_peps_handler.p1: ata_api_peps_handler.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_peps_handler.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_peps_handler.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_peps_handler.p1 ata_api_peps_handler.c 
+	@-${MV} ${OBJECTDIR}/ata_api_peps_handler.d ${OBJECTDIR}/ata_api_peps_handler.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_peps_handler.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/ata_api_crc.p1: ata_api_crc.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_crc.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_crc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_crc.p1 ata_api_crc.c 
+	@-${MV} ${OBJECTDIR}/ata_api_crc.d ${OBJECTDIR}/ata_api_crc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_crc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/ata_api_aes.p1: ata_api_aes.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_aes.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_aes.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_aes.p1 ata_api_aes.c 
+	@-${MV} ${OBJECTDIR}/ata_api_aes.d ${OBJECTDIR}/ata_api_aes.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_aes.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -280,6 +304,30 @@ ${OBJECTDIR}/uart.p1: uart.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/uart.p1 uart.c 
 	@-${MV} ${OBJECTDIR}/uart.d ${OBJECTDIR}/uart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/ata_api_peps_handler.p1: ata_api_peps_handler.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_peps_handler.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_peps_handler.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_peps_handler.p1 ata_api_peps_handler.c 
+	@-${MV} ${OBJECTDIR}/ata_api_peps_handler.d ${OBJECTDIR}/ata_api_peps_handler.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_peps_handler.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/ata_api_crc.p1: ata_api_crc.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_crc.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_crc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_crc.p1 ata_api_crc.c 
+	@-${MV} ${OBJECTDIR}/ata_api_crc.d ${OBJECTDIR}/ata_api_crc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_crc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/ata_api_aes.p1: ata_api_aes.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ata_api_aes.p1.d 
+	@${RM} ${OBJECTDIR}/ata_api_aes.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/ata_api_aes.p1 ata_api_aes.c 
+	@-${MV} ${OBJECTDIR}/ata_api_aes.d ${OBJECTDIR}/ata_api_aes.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/ata_api_aes.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
