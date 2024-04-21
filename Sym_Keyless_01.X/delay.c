@@ -24,7 +24,7 @@ void _delay1uS(uint8_t n)
         n /= (U8)(0.25*4.0); // n /= (U8)(0.25*(1+3)); // based: 1uS
         do { NOP(); } while( --n );    
 #else
-        n /= (uint8_t)(0.125*8.0); // n /= (U8)(0.125*(5+3)); // based: 1uS
+        n /= (uint8_t)(0.125*8.0); // n /= (U8)(0.125*(5+4)); // based: 1uS
         do { NOP();} while( --n );    
 #endif
     }while(n--);

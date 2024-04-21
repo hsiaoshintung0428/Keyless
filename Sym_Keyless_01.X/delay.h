@@ -17,6 +17,9 @@ void _delay1mS(uint8_t n);
 void _delay1uS(uint8_t n);
 void _delay1S(uint8_t n);
 
+#define _delay_us(n)  _delay1uS(n)
+#define _delay_ms(n)  _delay1mS(n)
+
 #ifdef	__cplusplus
 }
 #endif
