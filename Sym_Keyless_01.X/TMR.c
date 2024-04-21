@@ -1,6 +1,6 @@
 /* 
  * File:   ioport_core.c
- * Author: Norton.Hsioa
+ * Author: 
  *
  * Created on 
  */
