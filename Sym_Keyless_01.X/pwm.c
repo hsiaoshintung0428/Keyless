@@ -1,6 +1,6 @@
 /* 
  * File:   pwm.c
- * Author: Norton.Hsioa
+ * Author: 
  *
  * Created on 
  */
@@ -64,9 +64,15 @@ void Init_PWM4(void)
 
 void Init_PWM9(void)
 {
-    //TMR4
+    //TMR6
     //125KHz
-    PWM9CON = 0;
+    TRISBbits.TRISB1 = 0;
+    PWM9CON = 0x80;
+    Set_PWM_Duty(PWM_Channel_9,50);
+    T6PR = 0x10;
+    T6RST = 0x00;
+    PWM9CONbits.EN = 1;
+    T6CON = 0x80;
 }
 
 
