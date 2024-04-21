@@ -1,6 +1,6 @@
 /* 
  * File:   ioport_core.c
- * Author: Norton.Hsioa
+ * Author: 
  *
  * Created on 
  */
@@ -58,6 +58,7 @@ void Init_GPIO(void)
         IOCCP   =   def_PORTC_Int_PEDGE;    //interrupt wareform rising edge 
         IOCCN   =   def_PORTC_Int_NEDGE;    //interrupt wareform falling edge 
         IOCCF   =   def_PORTC_Int_FLAG;     //interrupt flag must clear by software. 
+        
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         TRISD   =   def_PORTD_DIR;          //GPIO direction  
         ANSELD  =   def_PORTD_ANALOG;       //GPIO  analog input 
@@ -173,21 +174,29 @@ void Remap_GPIO(void)
     UnlockIO(); //Unlock PPS mode
     //--input
     T4INPPS = ppsOutmap(_ppsPORTA_,_ppsPIN0_);//PWM Detect -> RA0(TMR4 input)
-    INTPPS = ppsOutmap(_ppsPORTD_,_ppsPIN5_);//TF_PB6->RD5(INT0) 
+    INTPPS = ppsOutmap(_ppsPORTD_,_ppsPIN5_);//CF_PB6->RD5(INT0) 
     //INTPPS = ppsOutmap(_ppsPORTB_,_ppsPIN3_);//PWNAD->RB3(INT0) 
     //-Output
-    RB0PPS = _pps_Out_PWM9_ ;//n125K(PWM9)->RB1
-    RD2PPS = _pps_Out_PWM4_ ;//BlueLed(PWM4) ->RD2
+    //RB1PPS = _pps_Out_PWM9_ ;//n125K(PWM9)->RB1
+    //RD2PPS = _pps_Out_PWM4_ ;//BlueLed(PWM4) ->RD2
     //-UART
 // TX_init  //RB5 
 // RX_init  //RB4
     RB5PPS = _pps_Out_TX_;//RB5 
     RXPPS  = ppsOutmap(_ppsPORTB_,_ppsPIN4_);//RB4
+
+
+    TRISCbits.TRISC3 = 0; // CLK (ATA5781 PB1) -> Output
+    TRISCbits.TRISC5 = 0; // MOSI(ATA5781 PB2) -> Output   
+    TRISCbits.TRISC4 = 1; // MISO(ATA5781 PB3) -> Input
+
+    RC3PPS = _pps_Out_SCK_; // SPI_CLK   [CLK]
+    RC5PPS = _pps_Out_SDO_ ;// SPI_SDA   [RF_MOSI]
+    RC4PPS = _pps_Out_SDA_ ;// SPI_SDO   [RF_MISO]
+    LATCbits.LATC5 = 1;
     
-    SSPCLKPPS = ppsOutmap(_ppsPORTC_,_ppsPIN3_) ;     //Set SPI SSPCLKPSS to RC3[RF_CLK]
-    SSPDATPPS = ppsOutmap(_ppsPORTC_,_ppsPIN4_) ;     //Set SPI SSPDATPPS to RC4[RF_MISO]
-    RC5PPS = _pps_Out_SD0_ ;                          //Set RC5PPS to SPI_SDO   [RF_MOSI]
-    SSPSSPPS =  ppsOutmap(_ppsPORTD_,_ppsPIN3_) ;     //Set SPI SSPSSPPS  to RD3[RF_CS1]
+//    SSPDATPPS = 0b010100;
+      
     
     LockIO();
     

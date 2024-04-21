@@ -332,7 +332,7 @@ extern "C" {
 #define pbnRFSPICS             3
 #define pbmRFSPICS          BITn(pbnRFSPICS)
 
-#define SetRFSPICS(a)   LATDbits.LATD3 = a
+#define SetRFSPICS(a)        LATDbits.LATD3 = a
 
 //#define SetRFSPICS(a)       { if(a) (set(poRFSPICS,MASK(pbnRFSPICS)));  \
 //                              else  (clr(poRFSPICS,MASK(pbnRFSPICS)));}                            
@@ -401,7 +401,7 @@ extern "C" {
 #define def_PORTE_DIR           ((uint8_t)0xFF & ~(pbmMOTOPWM1|pbmMOTOPWM2))  //TRISA 
 #define def_PORTE_INITIAL       ((uint8_t)0x00)                        //LATA   
 #define def_PORTE_ANALOG        (uint8_t)0x00                          //ANSELA
-#define def_PORTE_PULLUP        (uint8_t)0xFF                          //WPUA
+#define def_PORTE_PULLUP        (uint8_t)0x00                          //WPUA
 #define def_PORTE_OPENDRAIN     (uint8_t)0x00                          //ODCONA
 #define def_PORTE_PWMSlewRate   (uint8_t)0xFF                          //SLRCONA
 #define def_PORTE_InputLevel    (uint8_t)0xFF                          //INLVLA               
@@ -503,7 +503,7 @@ typedef enum
     
     _pps_Out_SCK_ =33,//PortB,PortC
     _pps_Out_SDA_ =34,//PortB,PortC
-    _pps_Out_SD0_ =35,//PortB,PortC
+    _pps_Out_SDO_ =35,//PortB,PortC
 
     _pps_Out_TX_ =36,//PortB,PortC
     _pps_Out_CT_ =37,//PortB,PortC
@@ -524,7 +524,10 @@ typedef enum
 }PPS_Output_PERIPHERAL;
 
 
+#define RF_IRQ_IO_IN PORTDbits.RD5 
 
+#define GPIO_INPUT_LOW_LEVEL	0
+#define GPIO_INPUT_HIGH_LEVEL	1
 
 //**********EXTERN API******************//
 
