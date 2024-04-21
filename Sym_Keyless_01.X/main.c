@@ -1,13 +1,20 @@
 /* 
  * File:   main.c
- * Author: Norton.Hsioa
+ * Author: 
  *
  * Created on 
- * 20240415
- *完成模組 ADC 可動作, RB3可用中斷處理
+ * 20240421
+ *  完成模組 ADC 可動作, RB3可用中斷處理
+ *  可讀ata5781版本
  *  代辦事項 
- *  檢查解上鎖功能 確認DRV8872動作!!
- * 修改部分macro 設定
+ *  修改SPI模組設定,設定ATA5781 NREST為HI
+ *  待確認:
+ *  1.為何RF_PB6 int?
+ *  2.IMMO+ & n125K狀態?
+ *  3.模擬開機 解鎖
+ *  4.模擬關機 上鎖
+ *  5.確認PWM 方法
+ *  6.優化部分程式代碼 新增macro 
  * 
  */
 
@@ -28,6 +35,7 @@
 #include "hef.h"
 #include "spi.h"
 #include "ata5781.h"
+#include "ata_api_peps_handler.h"
 
 
 void Init_ExtOsc(void);
@@ -48,16 +56,37 @@ int main(int argc, char** argv)
   
     Remap_GPIO();
     Init_SPI();
-    Init_PWM();
-    FlashUnlock();
+        
+ //   Init_PWM();
+    //FlashUnlock();
     Init_interrupt();
-    Init_ATA5781();
+    TRISDbits.TRISD3	= 0;	// NSS = RD3 output
+	LATDbits.LATD3	= 0;	    // set low on RD3 (NSS)
     Init_uart();
-    FlashUnlock();
+    
+    Init_ATA5781();
+    CheckRFmessage();
+    //FlashUnlock();
     DRV8872_Sleep();//<--強制Moto Controller休眠
-
+    
+    TRISCbits.TRISC1 =0 ;
+    LATCbits.LATC1 =1;//BUZ COM 
+     _delay1mS(125);
+    LATCbits.LATC1 =0;
+    
+    TRISDbits.TRISD2 =0 ;
+    LATDbits.LATD2 =1;//Blue LED
+    
+    TRISCbits.TRISC7 =0 ;
+    LATCbits.LATC7 =1;//方向燈 Left
+    
+    TRISCbits.TRISC0 =0 ;
+    LATCbits.LATC0 =1;//方向燈 Right
    
-    if(PowerState == PS_G3)//when system resume from G3
+    TRISCbits.TRISC7 =0 ;
+    LATCbits.LATC7 =1;//方向燈 Left
+    
+    if(PowerState == PS_G3)//斷電resume
     {
         
     }
@@ -66,13 +95,17 @@ int main(int argc, char** argv)
     while(1)
     {
 
+
+        Putdata("main loop\n");
+        CheckRFmessage();
         if(INTCONbits.INTF)
         {
            INTCONbits.INTF = 0;
         }
-        
-        //aa = rf_ata5781_read_version();
-        //DumpintDec(aa);
+
+       // aa = rf_ata5781_read_version();       
+       // DumpintDec(aa);
+       //rf_ata5781_get_events(rf.events);
         
         if((mFLAG._bits._RFINT) || (mFLAG._bits._GPIO) )//中斷喚醒
         {
@@ -161,7 +194,7 @@ int main(int argc, char** argv)
         }//end中斷喚醒
         
         
-        _delay1mS(250);
+        _delay1mS(125);
     }//end while(1)
 
     return (EXIT_SUCCESS);
@@ -177,7 +210,7 @@ int main(int argc, char** argv)
 void Init_ExtOsc(void)
 {
      // SCS FOSC; SPLLEN disabled; IRCF 8MHz_HF; 
-    OSCCONbits.SPLLEN = ENABLE; 
+    OSCCONbits.SPLLEN = DISABLE; 
     OSCCONbits.IRCF =   IntOSC_8MHz;
     // SOSCR enabled; 
     OSCSTAT = 0x80;
