@@ -89,6 +89,7 @@ extern "C" {
     enum { RESET=0,SET};
 	enum { FALSE=0,TRUE=1};
     enum {LoVoltage =0,HiVoltage =1};
+    enum {HIGH =0,LOW =1};
 
      typedef  enum {IntOSC_31KHz = 0,
                    IntOSC_31K25Hz = 2,
