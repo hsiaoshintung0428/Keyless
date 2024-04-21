@@ -33,7 +33,7 @@ void Init_interrupt(void)
     Set_Globa_Interrupt(ENABLE);
     Set_Extern_Interrupt(ENABLE);
     
-    Set_INTIE(ENABLE);
+//    Set_INTIE(ENABLE);
 //    Set_TMR1IE(ENABLE);
     Set_IOCIE(ENABLE);
     IOCBPbits.IOCBP3 = 1;
