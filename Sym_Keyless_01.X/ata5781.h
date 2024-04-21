@@ -36,7 +36,24 @@ extern struct rfstruct  rf;
 
 
 extern void Init_ATA5781(void);
-extern unsigned char rf_ata5781_read_version( void );
+extern void rf_set_spi(void);
+
+extern unsigned char rf_ata5781_read_version( void );//o
+extern void rf_ata5781_get_events( unsigned char buf[] );//o
+extern void rf_ata5781_set_mode( unsigned char mode, unsigned char channel );//o
+
+//Read Fill Level Rx FIFO
+extern unsigned char rf_ata5781_read_rx_level( void );//o
+extern void rf_ata5781_read_rx_buf( unsigned char buf[], unsigned char len );//o
+//Read Fill Level RSSI FIFO
+extern unsigned char rf_ata5781_read_rssi_level( void );//o
+extern void rf_ata5781_read_rssi_buf( unsigned char buf[], unsigned char len );//o
+extern void rf_ata5831_wr_tx_buf( unsigned char length, unsigned char buf[]  );
+//
+
+
+#define BLOCK_SIZE 16
+extern unsigned char cryptoBlock[ BLOCK_SIZE ];
 
 #ifdef	__cplusplus
 }
