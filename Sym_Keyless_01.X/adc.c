@@ -39,9 +39,10 @@ void Init_ADC(void)
     ADCON1 = 0b11110000;
     ADCON2 = 0;
     ANSELC = 0;
-    ANSELA=0;
-    ANSELB=0;
-    ANSELC=0;
+    ANSELA = 0;
+    ANSELB = 0;
+    ANSELC = 0;
+    ANSELD = 0;
 //    TRISBbits.TRISB3 = 1;
 //    ANSELBbits.ANSB3 = 1;
 
